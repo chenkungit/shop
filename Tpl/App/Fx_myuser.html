@@ -46,13 +46,13 @@
 				<else/>				
 				<div class="ovflw back2">
 					<ul class="achos-ul ovflw">
-						<li class="ovflw border-b1"><h3>{$type}级用户总数：{$total}</h3><p>为缓解服务器压力，只显示最新50条记录。</p></li>
+						<li class="ovflw border-b1"><h3>{$type}用户总数：{$total}</h3><p>为缓解服务器压力，只显示最新50条记录。</p></li>
 					</ul>
 					<div class="Appbox">
 				   	<ul class="cp_list">
 				   		<volist name="cache" id="vo">
 					   		<li style="padding-bottom: 10px;"><a href="#"><i class="iconfont tb"><img class="hot-ico" src="{$vo.headimgurl}" /> </i><div><h3 style="color: red;">{$vo.nickname}</h3>
-					    	<p> 积分:{$vo.score}&nbsp;加入时间:{$vo.ctime|date="Y-m-d",###}</p></div></a>
+					    	<p> 总消费:{$vo.total_buy}&nbsp;加入时间:{$vo.ctime|date="Y-m-d",###}</p></div></a>
 					    	</li>
 				   		</volist>		    	
 				     </ul>

@@ -54,25 +54,27 @@
 			<input type="hidden" name="totalprice" value="{$totalprice}">
 			<textarea name="items" style="display: none;">{$allitems}</textarea>
 			<input type="hidden" name="isyf" value="{$isyf}">
+			<input type="hidden" name="bdgoodsid" value="">
+			<input type="hidden" name="bdgoodsprice" value="">
 		</div>
 		<!-- 商品明细  -->
 		<div class="ads-lst border-t1 border-b1 ovflw mr-b back2">
 			<p class="ads-tt border-b1">商品明细</p>
 			<foreach name="cache" item="vo">
-					<div class="ads_orinfo ads_padding3 ovflw border-b1">
-						<div class="ads_orinfol ovflw fl">
-							<div class="ads_or_img fl">
-								<!-- 图片大小为147*101 -->
-								<img src="{$vo.pic}"/>
-							</div>
-							<h3>{$vo.name}</h3>
-							<p class="color3 fonts2">{$vo.skuattr}</p>
+				<div class="ads_orinfo ads_padding3 ovflw border-b1">
+					<div class="ads_orinfol ovflw fl">
+						<div class="ads_or_img fl">
+							<!-- 图片大小为147*101 -->
+							<img src="{$vo.pic}"/>
 						</div>
-						<div class="ads_orprice ovflw ">
-							<p ><em class="fonts85">￥</em><em class="fonts18">{$vo.price}</em></p>
-							<p class="ads_ornum fonts85">X{$vo.num}</p>
-						</div>
-					</div>				
+						<h3>{$vo.name}</h3>
+						<p class="color3 fonts2">{$vo.skuattr}</p>
+					</div>
+					<div class="ads_orprice ovflw ">
+						<p ><em class="fonts85">￥</em><em class="fonts18">{$vo.price}</em></p>
+						<p class="ads_ornum fonts85">X{$vo.num}</p>
+					</div>
+				</div>
 			</foreach>
 			<p class="border-b1 ads_ortt3 fonts18 color3">&nbsp;使用代金卷<span class="fr"><select name="djqid" id="djqid" class="ads-sel"><option value="0" data-money="0">请选择有效代金卷</option><foreach name="djq" item="vo"><option value="{$vo.id}" data-money="{$vo.money}">{$vo.money}元代金卷</option></foreach></select></span></p>
 			<p class="border-b1 ads_ortt3 fonts85">&nbsp;邮费政策：<eq name="isyf" value="1">全场定邮{$yf}元，订单满{$yftop}元包邮。<else/>全场包邮</eq></p>

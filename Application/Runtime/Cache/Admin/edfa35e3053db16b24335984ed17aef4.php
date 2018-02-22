@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>WeMall分销管理</title>
+    <title>山东益缘购网络</title>
     <meta name="description" content="blank page" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -58,7 +58,7 @@
                     <a href="javascript:void(0)" class="navbar-brand">
                         <small>
                         <!--<?php echo ($_SESSION["CMS"]["set"]["name"]); ?>-->
-                        WeMall分销管理1
+                            益缘购网络管理
                         </small>
                     </a>
                 </div>
@@ -320,6 +320,7 @@
                                     </a>
                                 </li>
                             </ul>
+
                         </li>
                         <li>
                             <a href="<?php echo U('Admin/Vip/message');?>" data-loader="App-loader" data-loadername="通知中心">
@@ -348,6 +349,16 @@
                                 <li>
                                     <a href="<?php echo U('Admin/Vip/vipList');?>" data-loader="App-loader" data-loadername="会员列表">
                                         <span class="menu-text">会员列表</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo U('Admin/Vip/vipHhrSet');?>" data-loader="App-loader" data-loadername="合伙人比例设置">
+                                        <span class="menu-text">合伙人比例设置</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo U('Admin/Vip/vipJyjlbSet');?>" data-loader="App-loader" data-loadername="精英俱乐部比例设置">
+                                        <span class="menu-text">精英俱乐部比例设置</span>
                                     </a>
                                 </li>
                             </ul>

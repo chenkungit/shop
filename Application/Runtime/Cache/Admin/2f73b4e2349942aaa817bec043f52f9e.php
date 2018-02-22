@@ -218,6 +218,16 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-lg-2 control-label">报单商品</label>
+                        <div class="col-lg-4">
+                            <label>
+                                <input type="hidden" name="isbd" value="<?php echo ($cache["isbd"]); ?>" id="isbd">
+                                <input class="checkbox-slider slider-icon colored-darkorange" type="checkbox" id="isbdbtn" <?php if(($cache["isbd"]) == "1"): ?>checked="checked"<?php endif; ?>>
+                                <span class="text darkorange">&nbsp;&nbsp;&larr;重要：开启后商品为报单商品。</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-lg-2 control-label">商品详情</label>
                         <div class="col-lg-4">
                             <!--必须插入空input避免验证冲突-->
@@ -277,6 +287,10 @@ $('#AppForm').bootstrapValidator({
 $('#isskubtn').on('click', function() {
     var value = $(this).prop('checked') ? 1 : 0;
     $('#issku').val(value);
+});
+$('#isbdbtn').on('click', function() {
+    var value = $(this).prop('checked') ? 1 : 0;
+    $('#isbd').val(value);
 });
 $('#ismybtn').on('click', function() {
     var value = $(this).prop('checked') ? 1 : 0;

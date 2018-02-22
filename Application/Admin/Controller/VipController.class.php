@@ -384,6 +384,8 @@ class VipController extends BaseController
         $p = $_GET['p'] ? $_GET['p'] : 1;
         $search = I('search') ? I('search') : '';
         $plv = I('plv') ? I('plv') : 0;
+        $isjyjlb = I('isjyjlb') ? I('isjyjlb') : 0;
+        $ishhr = I('ishhr') ? I('ishhr') : 0;
         if ($search) {
             $map['nickname|mobile'] = array('like', "%$search%");
             $this->assign('search', $search);
@@ -391,6 +393,14 @@ class VipController extends BaseController
         if ($plv) {
             $map['plv'] = $plv;
             $this->assign('plv', $plv);
+        }
+        if($isjyjlb){
+            $map['isjyjlb'] = $isjyjlb;
+            $this->assign('isjyjlb', $isjyjlb);
+        }
+        if($ishhr){
+            $map['ishhr'] = $ishhr;
+            $this->assign('ishhr', $ishhr);
         }
         $psize = self::$CMS['set']['pagesize'] ? self::$CMS['set']['pagesize'] : 20;
         $cache = $m->where($map)->page($p, $psize)->select();
@@ -418,6 +428,100 @@ class VipController extends BaseController
         $this->display();
     }
 
+    //add by ck 合伙人比例设置
+    public function vipHhrSet()
+    {
+        $m = M('vip_hhr');
+        //设置面包导航，主加载器请配置
+        $bread = array(
+            '0' => array(
+                'name' => '会员中心',
+                'url' => U('Admin/Vip/#')
+            ),
+            '1' => array(
+                'name' => '合伙人比例设置',
+                'url' => U('Admin/Vip/vipHhrSet')
+            )
+        );
+        $this->assign('breadhtml', $this->getBread($bread));
+        //处理POST提交
+        if (IS_POST) {
+            //die('aa');
+            $data = I('post.');
+            $bl = I('post.bl');
+            if($bl < 0 || $bl >=1)
+            {
+                $info['status'] = 0;
+                $info['msg'] = '比例不能大于等于1或小于0！';
+            }else {
+                $old = $m->find();
+                if ($old) {
+                    $re = $m->save($data);
+                    if (FALSE !== $re) {
+                        $info['status'] = 1;
+                        $info['msg'] = '设置成功！';
+                    } else {
+                        $info['status'] = 0;
+                        $info['msg'] = '设置失败！';
+                    }
+                } else {
+                    $info['status'] = 0;
+                    $info['msg'] = '设置失败！系统配置表不存在！';
+                }
+            }
+            $this->ajaxReturn($info);
+        }
+        $cache = $m->find();
+        $this->assign('cache', $cache);
+        $this->display();
+    }
+    //精英俱乐部设置
+    public function vipJyjlbSet()
+    {
+        $m = M('vip_jyjlb');
+        //设置面包导航，主加载器请配置
+        $bread = array(
+            '0' => array(
+                'name' => '会员中心',
+                'url' => U('Admin/Vip/#')
+            ),
+            '1' => array(
+                'name' => '精英俱乐部比例设置',
+                'url' => U('Admin/Vip/vipJyjlbSet')
+            )
+        );
+        $this->assign('breadhtml', $this->getBread($bread));
+        //处理POST提交
+        if (IS_POST) {
+            //die('aa');
+            $data = I('post.');
+            $bl = I('post.bl');
+            if($bl < 0 || $bl >=1)
+            {
+                $info['status'] = 0;
+                $info['msg'] = '比例不能大于等于1或小于0！';
+            }else {
+                $old = $m->find();
+                if ($old) {
+                    $re = $m->save($data);
+                    if (FALSE !== $re) {
+                        $info['status'] = 1;
+                        $info['msg'] = '设置成功！';
+                    } else {
+                        $info['status'] = 0;
+                        $info['msg'] = '设置失败！';
+                    }
+                } else {
+                    $info['status'] = 0;
+                    $info['msg'] = '设置失败！系统配置表不存在！';
+                }
+            }
+            $this->ajaxReturn($info);
+        }
+        $cache = $m->find();
+        $this->assign('cache', $cache);
+        $this->display();
+    }
     //CMS后台商品设置
     public function vipSet()
     {
@@ -776,6 +880,60 @@ class VipController extends BaseController
         if (I('pids')) {
             $cache['pids'] = I('pids');
             $this->assign('cache', $cache);
+        }
+        $this->display();
+    }
+    //设置精英俱乐部派发金额
+    public function jyjlbMoneySet()
+    {
+        $id = I('id');
+        $m = M('vip_jyjlbmoney');
+        //设置面包导航，主加载器请配置
+        $bread = array(
+            '0' => array(
+                'name' => '会员中心',
+                'url' => U('Admin/Vip/#'),
+            ),
+            '1' => array(
+                'name' => '精英俱乐部金额设置',
+                'url' => $id ? U('Admin/Vip/jyjlbMoneySet', array('id' => $id)) : U('Admin/Vip/vipList'),
+            ),
+        );
+        $this->assign('breadhtml', $this->getBread($bread));
+        //处理POST提交
+        if (IS_POST) {
+            $data = I('post.');
+            $data['ctime'] = time();
+            if ($id) {
+                $re = $m->save($data);
+                if (FALSE !== $re) {
+                    $info['status'] = 1;
+                    $info['msg'] = '派发成功！';
+                } else {
+                    $info['status'] = 0;
+                    $info['msg'] = '派发失败！';
+                }
+            } else {
+                $re = $m->add($data);
+                if ($re) {
+                    //更新会员最新余额
+                    $vipM = M('vip');
+                    $vipInfo = $vipM->where('id='.$data['vipid'])->find();
+                    $vipInfo['money'] = $vipInfo['money'] + round($data['money'],2);
+                    $vipM->save($vipInfo);
+                    $info['status'] = 1;
+                    $info['msg'] = '派发成功！';
+                } else {
+                    $info['status'] = 0;
+                    $info['msg'] = '派发失败！';
+                }
+            }
+            $this->ajaxReturn($info);
+        }
+        //处理编辑界面
+        if ($id) {
+            //$cache = $m->where('id=' . $id)->find();
+            $this->assign('vipid', $id);
         }
         $this->display();
     }

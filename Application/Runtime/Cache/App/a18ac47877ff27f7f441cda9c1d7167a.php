@@ -36,7 +36,7 @@
             <div class="fl home-info">
                 <p><?php echo ($data["nickname"]); ?> &nbsp&nbsp</p>
                 <p style="font-size:0.8em;">ID：<span ><?php echo ($data["id"]); ?></span></p>
-                <p style="font-size:0.8em;">等级：<span class="home-jf" id="fxname"><?php echo ($data["fxname"]); ?></span></p>
+                <p style="font-size:0.8em;">等级：<span class="home-jf" id="fxname"><?php echo ($data["fxname"]); ?></span> <span class="home-jf" id="levelname"><?php echo ($data["levelname"]); ?></span></p>
             </div>
             <div class="fr home-dj">
                 <?php if(($isqiandao) == "1"): ?><a href="#" class="home-qd ovflw text-c color3" id="home-qd">
@@ -49,7 +49,7 @@
             </div>
             <div class="clr"></div>
             <div class="home-panel ovflw">
-                <div class="fl home-item"><a href="javascript:void(0)" class="home-br text-c"><span id="home-jf"><?php echo ($data["score"]); ?></span><span class="home-add" id="add-jf"></span><p>我的积分</p></a></div>
+                <div class="fl home-item"><a href="javascript:void(0)" class="home-br text-c"><span id="home-jf"><?php echo ($data["score"]); ?></span><span class="home-add" id="add-jf"></span><p>我的金果</p></a></div>
                 <?php if(($isqiandao) == "1"): ?><div class="fl home-item"><a href="javascript:void(0)" class="home-br text-c"><span id="home-jy"><?php echo ($data["cur_exp"]); ?></span><span class="home-add" id="add-jy"></span><p>我的经验</p></a></div>
                     <?php else: ?>
                     <div class="fl home-item"><a href="javascript:void(0)" class="home-br text-c"><span><?php echo ($data["total_xxlink"]); ?></span><p>我的团队</p></a></div><?php endif; ?>

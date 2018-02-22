@@ -29,6 +29,20 @@
                     <a href="#" class="hide" id="sendMailbtn" data-loader="App-loader" data-loadername="发送邮件"></a>
                     <div class="pull-right">
                         <form id="App-search">
+                            <label>
+                                <label style="margin-bottom: 0px;">合伙人</label>
+                                <input type="hidden" name="ishhr" value="<?php echo ($ishhr); ?>" id="ishhr">
+                                <input class="checkbox-slider slider-icon colored-darkorange" type="checkbox" id="ishhrbtn" <?php if(($ishhr) == "1"): ?>checked="checked"<?php endif; ?>>
+                                <span class="text darkorange" style=" margin-bottom: -9px"></span>
+
+                            </label>
+                            <label>
+                                <label style="margin-bottom: 0px;">精英俱乐部</label>
+                                    <input type="hidden" name="isjyjlb" value="<?php echo ($isjyjlb); ?>" id="isjyjlb">
+                                    <input class="checkbox-slider slider-icon colored-darkorange" type="checkbox" id="isjyjlbbtn" <?php if(($isjyjlb) == "1"): ?>checked="checked"<?php endif; ?>>
+                                    <span class="text darkorange" style=" margin-bottom: -9px"></span>
+
+                            </label>
                             <label style="margin-bottom: 0px;">
                                 <input name="plv" type="search" class="form-control input-sm" placeholder="会员层级" value="<?php echo ($plv); ?>">
                             </label>
@@ -95,8 +109,11 @@
                                 <td class=" "><?php echo (date('Y-m-d',$vo["ctime"])); ?></td>
                                 <td class=" "><?php echo (date('Y-m-d',$vo["cctime"])); ?></td>
                                 <!--<td class=" "><?php echo ($vo["status"]); ?></td>-->
-                                <td class="center "><a href="<?php echo U('Admin/Vip/vipSet/',array('id'=>$vo['id']));?>" class="btn btn-success btn-xs" data-loader="App-loader" data-loadername="会员编辑"><i class="fa fa-edit"></i> 编辑</a>&nbsp;&nbsp;
+                                <td class="center ">
+                                    <a href="<?php echo U('Admin/Vip/vipSet/',array('id'=>$vo['id']));?>" class="btn btn-success btn-xs" data-loader="App-loader" data-loadername="会员编辑"><i class="fa fa-edit"></i> 编辑</a>&nbsp;&nbsp;
                                     <button class="btn btn-sky btn-xs App-vippath" data-id="<?php echo ($vo["id"]); ?>" data-path="<?php echo ($vo["path"]); ?>"><i class="fa fa-eye"></i> 层级树</button>
+                                    <?php if(($vo["isjyjlb"]) == "1"): ?><a href="<?php echo U('Admin/Vip/jyjlbMoneySet/',array('id'=>$vo['id']));?>" class="btn btn-danger btn-xs" data-loader="App-loader" data-loadername="派发金额"><i class="fa fa-dollar"></i> 派发金额</a>&nbsp;&nbsp;<?php endif; ?>
+
                                     <!-- &nbsp;&nbsp;<a href="<?php echo U('Admin/Vip/vipFxtj/',array('id'=>$vo['id']));?>" class="btn btn-darkorange btn-xs" target="_blank"><i class="fa fa-money"></i> 收益预估</a> -->
                                     <!--&nbsp;&nbsp;<a href="<?php echo U('Admin/vip/message/');?>" class="btn btn-danger btn-xs" data-type = "del" data-ajax="<?php echo U('Admin/vip/messageDel/',array('id'=>$vo['id']));?>" ><i class="fa fa-trash-o"></i> 删除</a>--></td>
                             </tr><?php endforeach; endif; else: echo "" ;endif; ?>
@@ -117,6 +134,17 @@ setBread($('#tmpbread').html());
 <!--/面包屑导航封装-->
 <!--全选特效封装/全部删除-->
 <script type="text/javascript">
+
+$('#isjyjlbbtn').on('click', function() {
+    var value = $(this).prop('checked') ? 1 : 0;
+    $('#isjyjlb').val(value);
+});
+
+$('#ishhrbtn').on('click', function() {
+    var value = $(this).prop('checked') ? 1 : 0;
+    $('#ishhr').val(value);
+
+});
 //全选
 var checkall = $('#App-table .App-checkall');
 var checks = $('#App-table .App-check');

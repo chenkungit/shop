@@ -33,7 +33,7 @@
 						<li class="ovflw border-b1"><h3>此待收日志仅做预估值，实收按订单真实完成计算！</h3><p>为缓解服务器压力，只显示最新50条记录。</p></li>
 					</ul>
 					<ul class="achos-ul ovflw">
-						<?php if(is_array($cache)): $i = 0; $__LIST__ = $cache;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li class="ovflw border-b1"><h3 class="ads-h3">贡献会员：<?php echo ($vo["fromname"]); ?></h3><p>订单号：<?php echo ($vo["oid"]); ?></p><p>订单金额：<?php echo ($vo["fxprice"]); ?></p><p>获得收益：<?php echo ($vo["fxyj"]); ?></p><p>收益级别：<?php if(($vo["ishg"]) == "1"): ?>超级VIP<?php else: ?>分销商<?php endif; ?></p><p class="ads-p"><?php echo (date("Y-m-d",$vo["ctime"])); ?></p></li><?php endforeach; endif; else: echo "" ;endif; ?>
+						<?php if(is_array($cache)): $i = 0; $__LIST__ = $cache;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li class="ovflw border-b1"><h3 class="ads-h3">贡献会员：<?php echo ($vo["fromname"]); ?></h3><p>订单号：<?php echo ($vo["oid"]); ?></p><p>订单金额：<?php echo ($vo["fxprice"]); ?></p><p>收益来源：<?php echo ($vo["fhlb"]); ?></p><p>获得收益：<?php echo ($vo["fxyj"]); ?></p><p>收益级别：<?php if(($vo["ishg"]) == "1"): ?>超级VIP<?php else: ?>分享会员<?php endif; ?></p><p class="ads-p"><?php echo (date("Y-m-d",$vo["ctime"])); ?></p></li><?php endforeach; endif; else: echo "" ;endif; ?>
 					</ul>					
 				</div><?php endif; ?>
 		

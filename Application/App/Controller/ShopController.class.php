@@ -34,6 +34,7 @@ class ShopController extends BaseController
 
     public function index()
     {
+
         //追入分享特效
         $options['appid'] = self::$_wxappid;
         $options['appsecret'] = self::$_wxappsecret;
@@ -629,7 +630,10 @@ class ShopController extends BaseController
             $data['ispay'] = 0;
             $data['status'] = 1;//订单成功，未付款
             $data['ctime'] = time();
-
+            //报单商品编号
+            $bdgoodsid = "";
+            //报单商品价格
+            $bdgoodsprice = 0;
             //totalprice
             $totalprice = 0;
             $cache = M('Shop_basket')->where(array('vipid' => $_SESSION['WAP']['vipid']))->select();
@@ -642,13 +646,20 @@ class ShopController extends BaseController
                     $v['price'] = $sku['price'];
                     $totalprice = $totalprice + $v['price'] * $v['num'];
                 } else {
+
                     $v['price'] = $goods['price'];
                     $totalprice = $totalprice + $v['price'] * $v['num'];
+                    if ($goods['isbd'])
+                    {
+                        $bdgoodsid = $bdgoodsid.','.$goods['id'];
+                        $bdgoodsprice = $bdgoodsprice + $goods['price'] * $v['num'];
+                    }
                 }
+
             }
             $data['totalprice'] = $totalprice;
-
-
+            $data['bdgoodsid'] = $bdgoodsid;
+            $data['bdgoodsprice'] = $bdgoodsprice;
             $data['payprice'] = $data['totalprice'];
             //代金卷流程
             if ($data['djqid']) {
@@ -668,6 +679,8 @@ class ShopController extends BaseController
                 }
                 //修改支付价格
                 $data['payprice'] = $data['totalprice'] - $djq['money'];
+                //修改报单总价（默认代金券用到报单商品上）
+                $data['bdgoodsprice'] = $data['bdgoodsprice'] - $djq['money'];
             }
             //邮费逻辑
             if (self::$WAP['shopset']['isyf']) {
@@ -1037,7 +1050,9 @@ class ShopController extends BaseController
             //修改会员账户金额、经验、积分、等级
             $data_vip['id'] = $cache['vipid'];
             $data_vip['score'] = array('exp', 'score+' . round($cache['payprice'] * self::$WAP['vipset']['cz_score'] / 100));
+            //充值送经验和积分
             if (self::$WAP['vipset']['cz_exp'] > 0) {
+                //更改 只有报单商品才会有经验和变为分销商
                 $data_vip['exp'] = array('exp', 'exp+' . round($cache['payprice'] * self::$WAP['vipset']['cz_exp'] / 100));
                 $data_vip['cur_exp'] = array('exp', 'cur_exp+' . round($cache['payprice'] * self::$WAP['vipset']['cz_exp'] / 100));
                 $level = $this->getLevel(self::$WAP['vip']['cur_exp'] + round($cache['payprice'] * self::$WAP['vipset']['cz_exp'] / 100));
@@ -1068,11 +1083,14 @@ class ShopController extends BaseController
             // $fx2rate=self::$WAP['shopset']['fx2rate']/100;
             // $fx3rate=self::$WAP['shopset']['fx3rate']/100;
             $fxtmp = array();//缓存3级数组
-            if ($pid) {
+            if ($pid && $cache['bdgoodsid']) {
                 //第一层分销
                 $fx1 = $mvip->where('id=' . $pid)->find();
                 if ($fx1['isfx']) {
-                    $fxlog['fxyj'] = $commission->ordersCommission('fx1rate', $orderids);
+                    //$fxlog['fxyj'] = $commission->ordersCommission('fx1rate', $orderids);
+                    $fxlog['fxyj'] = $commission->ordersCommissionNew($fx1,'yj', $orderids);
+                    //新增分红类别
+                    $fxlog['fhlb'] = "分享红利";
                     $fx1['money'] = $fx1['money'] + $fxlog['fxyj'];
                     $fx1['total_xxbuy'] = $fx1['total_xxbuy'] + 1;//下线中购买产品总次数
                     $fx1['total_xxyj'] = $fx1['total_xxyj'] + $fxlog['fxyj'];//下线贡献佣金
@@ -1081,6 +1099,7 @@ class ShopController extends BaseController
                     $fxlog['fromname'] = $_SESSION['WAP']['vip']['nickname'];
                     $fxlog['to'] = $fx1['id'];
                     $fxlog['toname'] = $fx1['nickname'];
+
                     if (FALSE !== $rfx) {
                         //佣金发放成功
                         $fxlog['status'] = 1;
@@ -1092,12 +1111,57 @@ class ShopController extends BaseController
                     //$rfxlog=$mfxlog->add($fxlog);
                     //file_put_contents('./Data/app_debug.txt','日志时间:'.date('Y-m-d H:i:s').PHP_EOL.'纪录信息:'.$rfxlog.PHP_EOL.PHP_EOL.$mfxlog->getLastSql().PHP_EOL.PHP_EOL,FILE_APPEND);
                     array_push($fxtmp, $fxlog);
+
+                    //价值盟友模块
+                    //1.获得上级分享红利的10% 多人平均分配
+                    $subvips = $mvip->where('pid=' . $fx1['id'])->select();
+                    $counts = $mvip->where('pid=' . $fx1['id'])->count();
+                    if($counts > 0)
+                    {
+                        foreach ($subvips as $kk => $vv)
+                        {
+                            $jzmylog['oid'] = $orderid;
+                            $jzmylog['fxprice'] = round($fxlog['fxyj']*0.1,2);
+                            $jzmylog['ctime'] = time();
+                            $jzmylog['fxyj'] = round($fxlog['fxyj']*0.1/$counts,2);
+                            $jzmylog['fhlb'] = "价值盟友";
+                            $jzmylog['from'] = $fx1['id'];
+                            $jzmylog['fromname'] = $fx1['nickname'];
+                            $jzmylog['to'] = $vv['id'];
+                            $jzmylog['toname'] = $vv['nickname'];
+                            $jzmylog['status'] = 1;
+                            array_push($fxtmp,$jzmylog);
+                        }
+                    }
+                    //2.获得同一级左右分享的5%
+                    if ($fx1['pid'] > 0)
+                    {
+                        $zyvips= $mvip->where('pid='.$fx1['pid'].' and id <> '.$fx1['id'])->select();
+                        $zycounts = $mvip->where('pid='.$fx1['pid'].' and id <> '.$fx1['id'])->count();
+                        foreach ($zyvips as $kk => $vv)
+                        {
+                            $zylog['oid'] = $orderid;
+                            $zylog['fxprice'] = round($fxlog['fxyj']*0.05,2);
+                            $zylog['ctime'] = time();
+                            $zylog['fxyj'] = round($fxlog['fxyj']*0.05/$zycounts,2);
+                            $zylog['fhlb'] = "价值盟友";
+                            $zylog['from'] = $fx1['id'];
+                            $zylog['fromname'] = $fx1['nickname'];
+                            $zylog['to'] = $vv['id'];
+                            $zylog['toname'] = $vv['nickname'];
+                            $zylog['status'] = 1;
+                            array_push($fxtmp,$zylog);
+                        }
+                    }
                 }
                 //第二层分销
                 if ($fx1['pid']) {
                     $fx2 = $mvip->where('id=' . $fx1['pid'])->find();
                     if ($fx2['isfx']) {
-                        $fxlog['fxyj'] = $commission->ordersCommission('fx2rate', $orderids);
+                        //$fxlog['fxyj'] = $commission->ordersCommission('fx2rate', $orderids);
+                        $fxlog['fxyj'] = $commission->ordersCommissionNew($fx2,'ej', $orderids);
+                        //新增分红类别
+                        $fxlog['fhlb'] = "分享红利";
                         $fx2['money'] = $fx2['money'] + $fxlog['fxyj'];
                         $fx2['total_xxbuy'] = $fx2['total_xxbuy'] + 1;//下线中购买产品人数计数
                         $fx2['total_xxyj'] = $fx2['total_xxyj'] + $fxlog['fxyj'];//下线贡献佣金
@@ -1117,13 +1181,58 @@ class ShopController extends BaseController
                         //$rfxlog=$mfxlog->add($fxlog);
                         //file_put_contents('./Data/app_debug.txt','日志时间:'.date('Y-m-d H:i:s').PHP_EOL.'纪录信息:'.$rfxlog.PHP_EOL.PHP_EOL.$mfxlog->getLastSql().PHP_EOL.PHP_EOL,FILE_APPEND);
                         array_push($fxtmp, $fxlog);
+
+                        //价值盟友模块
+                        //1.获得上级分享红利的10% 多人平均分配
+                        $subvips = $mvip->where('pid=' . $fx2['id'])->select();
+                        $counts = $mvip->where('pid=' . $fx2['id'])->count();
+                        if($counts > 0)
+                        {
+                            foreach ($subvips as $kk => $vv)
+                            {
+                                $jzmylog['oid'] = $orderid;
+                                $jzmylog['fxprice'] = round($fxlog['fxyj']*0.1,2);
+                                $jzmylog['ctime'] = time();
+                                $jzmylog['fxyj'] = round($fxlog['fxyj']*0.1/$counts,2);
+                                $jzmylog['fhlb'] = "价值盟友";
+                                $jzmylog['from'] = $fx2['id'];
+                                $jzmylog['fromname'] = $fx2['nickname'];
+                                $jzmylog['to'] = $vv['id'];
+                                $jzmylog['toname'] = $vv['nickname'];
+                                $jzmylog['status'] = 1;
+                                array_push($fxtmp,$jzmylog);
+                            }
+                        }
+                        //2.获得同一级左右分享的5%
+                        if ($fx2['pid'] > 0)
+                        {
+                            $zyvips= $mvip->where('pid='.$fx2['pid'].' and id <> '.$fx2['id'])->select();
+                            $zycounts = $mvip->where('pid='.$fx2['pid'].' and id <> '.$fx2['id'])->count();
+                            foreach ($zyvips as $kk => $vv)
+                            {
+                                $zylog['oid'] = $orderid;
+                                $zylog['fxprice'] = round($fxlog['fxyj']*0.05,2);
+                                $zylog['ctime'] = time();
+                                $zylog['fxyj'] = round($fxlog['fxyj']*0.05/$zycounts,2);
+                                $zylog['fhlb'] = "价值盟友";
+                                $zylog['from'] = $fx2['id'];
+                                $zylog['fromname'] = $fx2['nickname'];
+                                $zylog['to'] = $vv['id'];
+                                $zylog['toname'] = $vv['nickname'];
+                                $zylog['status'] = 1;
+                                array_push($fxtmp,$zylog);
+                            }
+                        }
                     }
                 }
                 //第三层分销
                 if ($fx2['pid']) {
                     $fx3 = $mvip->where('id=' . $fx2['pid'])->find();
                     if ($fx3['isfx']) {
-                        $fxlog['fxyj'] = $commission->ordersCommission('fx3rate', $orderids);
+                        //$fxlog['fxyj'] = $commission->ordersCommission('fx3rate', $orderids);
+                        $fxlog['fxyj'] = $commission->ordersCommissionNew($fx3,'sj', $orderids);
+                        //新增分红类别
+                        $fxlog['fhlb'] = "分享红利";
                         $fx3['money'] = $fx3['money'] + $fxlog['fxyj'];
                         $fx3['total_xxbuy'] = $fx3['total_xxbuy'] + 1;//下线中购买产品人数计数
                         $fx3['total_xxyj'] = $fx3['total_xxyj'] + $fxlog['fxyj'];//下线贡献佣金
@@ -1143,6 +1252,48 @@ class ShopController extends BaseController
                         //$rfxlog=$mfxlog->add($fxlog);
                         //file_put_contents('./Data/app_debug.txt','日志时间:'.date('Y-m-d H:i:s').PHP_EOL.'纪录信息:'.$rfxlog.PHP_EOL.PHP_EOL.$mfxlog->getLastSql().PHP_EOL.PHP_EOL,FILE_APPEND);
                         array_push($fxtmp, $fxlog);
+
+                        //价值盟友模块
+                        //1.获得上级分享红利的10% 多人平均分配
+                        $subvips = $mvip->where('pid=' . $fx3['id'])->select();
+                        $counts = $mvip->where('pid=' . $fx3['id'])->count();
+                        if($counts > 0)
+                        {
+                            foreach ($subvips as $kk => $vv)
+                            {
+                                $jzmylog['oid'] = $orderid;
+                                $jzmylog['fxprice'] = round($fxlog['fxyj']*0.1,2);
+                                $jzmylog['ctime'] = time();
+                                $jzmylog['fxyj'] = round($fxlog['fxyj']*0.1/$counts,2);
+                                $jzmylog['fhlb'] = "价值盟友";
+                                $jzmylog['from'] = $fx3['id'];
+                                $jzmylog['fromname'] = $fx3['nickname'];
+                                $jzmylog['to'] = $vv['id'];
+                                $jzmylog['toname'] = $vv['nickname'];
+                                $jzmylog['status'] = 1;
+                                array_push($fxtmp,$jzmylog);
+                            }
+                        }
+                        //2.获得同一级左右分享的5%
+                        if ($fx3['pid'] > 0)
+                        {
+                            $zyvips= $mvip->where('pid='.$fx3['pid'].' and id <> '.$fx3['id'])->select();
+                            $zycounts = $mvip->where('pid='.$fx3['pid'].' and id <> '.$fx3['id'])->count();
+                            foreach ($zyvips as $kk => $vv)
+                            {
+                                $zylog['oid'] = $orderid;
+                                $zylog['fxprice'] = round($fxlog['fxyj']*0.05,2);
+                                $zylog['ctime'] = time();
+                                $zylog['fxyj'] = round($fxlog['fxyj']*0.05/$zycounts,2);
+                                $zylog['fhlb'] = "价值盟友";
+                                $zylog['from'] = $fx3['id'];
+                                $zylog['fromname'] = $fx3['nickname'];
+                                $zylog['to'] = $vv['id'];
+                                $zylog['toname'] = $vv['nickname'];
+                                $zylog['status'] = 1;
+                                array_push($fxtmp,$zylog);
+                            }
+                        }
                     }
                 }
                 //多层分销
@@ -1151,6 +1302,10 @@ class ShopController extends BaseController
                     if (!$refxlog) {
                         file_put_contents('./Data/app_fx_error.txt', '错误日志时间:' . date('Y-m-d H:i:s') . PHP_EOL . '错误纪录信息:' . $rfxlog . PHP_EOL . PHP_EOL . $mfxlog->getLastSql() . PHP_EOL . PHP_EOL, FILE_APPEND);
                     }
+                }
+                //待收佣金改变状态
+                if (count($fxtmp) >= 1) {
+                    $commission->ordersCommissionDs($orderids);
                 }
                 //花鼓分销方案
                 $allhg = $mvip->field('id')->where('isfxgd=1')->select();
@@ -1183,7 +1338,42 @@ class ShopController extends BaseController
                     }
                 }
 
+                //合伙人佣金发放
+                $viphhr = M('vip_hhr');
+                $hhr = $mvip->where('ishhr=1')->select();
+                $count = $mvip-> where('ishhr=1')->count();
+                $rate =$viphhr->find();
+                if($count >0)
+                {
+                    foreach ($hhr as $k=>$v)
+                    {
+                        $fxhhr = $mvip->where('id=' . $v['id'])->find();
+                        $fxhhr['money'] = $fxhhr['money'] + round($fxprice * $rate['bl'] / $count,2);
+                        $fxhhr['total_xxbuy'] = $fxhhr['total_xxbuy'] + 1;//下线中购买产品人数计数
+                        $fxhhr['total_xxyj'] = $fxhhr['total_xxyj'] + $fxlog['fxyj'];//下线贡献佣金
+                        $rfx = $mvip->save($fxhhr);
+                        if (FALSE !== $rfx) {
+                            //佣金发放成功
+                            $hfxlog['status'] = 1;
+                        } else {
+                            //佣金发放失败
+                            $hfxlog['status'] = 0;
+                        }
+                        $hfxlog['oid'] = $cache['id'];
+                        $hfxlog['from'] = $_SESSION['WAP']['vipid'];
+                        $hfxlog['fxprice'] = $fxprice;
+                        $hfxlog['ctime'] = time();
+                        $hfxlog['fxyj'] = round($fxprice * $rate['bl'] / $count,2);
+                        $hfxlog['fromname'] = $_SESSION['WAP']['vip']['nickname'];
+                        $hfxlog['to'] = $v['id'];
+                        $hfxlog['toname'] = $v['nickname'];
+                        $hfxlog['fhlb'] = "合伙人分红";
+                        $mfxlog->add($hfxlog);
+                    }
+                }
+
             }
+
 
             $mlog = M('Shop_order_log');
             $dlog['oid'] = $cache['id'];
@@ -1382,19 +1572,19 @@ class ShopController extends BaseController
                             // 插入订单支付成功模板消息结束=================
 
                             //首次支付成功自动变为花蜜
-                            if ($vip && !$vip['isfx']) {
-                                $rvip = $mvip->where('id=' . $_SESSION['WAP']['vipid'])->setField('isfx', 1);
-                                $data_msg['pids'] = $_SESSION['WAP']['vipid'];
+//                            if ($vip && !$vip['isfx']) {
+//                                $rvip = $mvip->where('id=' . $_SESSION['WAP']['vipid'])->setField('isfx', 1);
+//                                $data_msg['pids'] = $_SESSION['WAP']['vipid'];
+//
+//                                $shopset = self::$WAP['shopset'] = $_SESSION['WAP']['shopset'];
+//                                $data_msg['title'] = "您成功升级为" . $shopset['name'] . "的" . $shopset['fxname'] . "！";
+//                                $data_msg['content'] = "欢迎成为" . $shopset['name'] . "的" . $shopset['fxname'] . "，开启一个新的旅程！";
+//                                $data_msg['ctime'] = time();
+//                                $rmsg = M('vip_message')->add($data_msg);
+//                            }
 
-                                $shopset = self::$WAP['shopset'] = $_SESSION['WAP']['shopset'];
-                                $data_msg['title'] = "您成功升级为" . $shopset['name'] . "的" . $shopset['fxname'] . "！";
-                                $data_msg['content'] = "欢迎成为" . $shopset['name'] . "的" . $shopset['fxname'] . "，开启一个新的旅程！";
-                                $data_msg['ctime'] = time();
-                                $rmsg = M('vip_message')->add($data_msg);
-                            }
-
-                            //代收花生米计算-只减不增
-                            $rds = $this->doDs($order);
+                            //待收计算-只减不增
+                            //$rds = $this->doDs($order);
 
                         } else {
                             //后端日志
@@ -1487,7 +1677,7 @@ class ShopController extends BaseController
         return true;
     }
 
-    //代收花生米计算
+    //待收佣金计算
     public function doDs($order)
     {
         //分销佣金计算
@@ -1506,17 +1696,20 @@ class ShopController extends BaseController
         $mfxlog = M('fx_dslog');
         $shopset = M('Shop_set')->find();//追入商城设置
         $fxlog['oid'] = $order['id'];
-        $fxlog['fxprice'] = $fxprice = $order['payprice'] - $order['yf'];
+        //$fxlog['fxprice'] = $fxprice = $order['payprice'] - $order['yf'];
+        $fxlog['fxprice'] = $fxprice = $order['bdgoodsprice'];
         $fxlog['ctime'] = time();
         // $fx1rate=$shopset['fx1rate']/100;
         // $fx2rate=$shopset['fx2rate']/100;
         // $fx3rate=$shopset['fx3rate']/100;
         $fxtmp = array();//缓存3级数组
-        if ($pid) {
+        if ($pid && $order['bdgoodsid']) {
             //第一层分销
             $fx1 = $mvip->where('id=' . $pid)->find();
             if ($fx1['isfx']) {
-                $fxlog['fxyj'] = $commission->ordersCommission('fx1rate', $orderids);
+                //$fxlog['fxyj'] = $commission->ordersCommission('fx1rate', $orderids);
+                $fxlog['fxyj'] = $commission->ordersCommissionNew($fx1,'yj', $orderids);
+                $fxlog['fhlb'] = "分享红利";
                 $fxlog['from'] = $vip['id'];
                 $fxlog['fromname'] = $vip['nickname'];
                 $fxlog['to'] = $fx1['id'];
@@ -1526,12 +1719,56 @@ class ShopController extends BaseController
                 //$rfxlog=$mfxlog->add($fxlog);
                 //file_put_contents('./Data/app_debug.txt','日志时间:'.date('Y-m-d H:i:s').PHP_EOL.'纪录信息:'.$rfxlog.PHP_EOL.PHP_EOL.$mfxlog->getLastSql().PHP_EOL.PHP_EOL,FILE_APPEND);
                 array_push($fxtmp, $fxlog);
+
+                //价值盟友模块
+                //1.获得上级分享红利的10% 多人平均分配
+                $subvips = $mvip->where('pid=' . $fx1['id'])->select();
+                $counts = $mvip->where('pid=' . $fx1['id'])->count();
+                if($counts > 0)
+                {
+                    foreach ($subvips as $kk => $vv)
+                    {
+                        $jzmylog['oid'] = $order['id'];
+                        $jzmylog['fxprice'] = round($fxlog['fxyj']*0.1,2);
+                        $jzmylog['ctime'] = time();
+                        $jzmylog['fxyj'] = round($fxlog['fxyj']*0.1/$counts,2);
+                        $jzmylog['fhlb'] = "价值盟友";
+                        $jzmylog['from'] = $fx1['id'];
+                        $jzmylog['fromname'] = $fx1['nickname'];
+                        $jzmylog['to'] = $vv['id'];
+                        $jzmylog['toname'] = $vv['nickname'];
+                        $jzmylog['status'] = 1;
+                        array_push($fxtmp,$jzmylog);
+                    }
+                }
+                //2.获得同一级左右分享的5%
+                if ($fx1['pid'] > 0)
+                {
+                    $zyvips= $mvip->where('pid='.$fx1['pid'].' and id <> '.$fx1['id'])->select();
+                    $zycounts = $mvip->where('pid='.$fx1['pid'].' and id <> '.$fx1['id'])->count();
+                    foreach ($zyvips as $kk => $vv)
+                    {
+                        $zylog['oid'] = $order['id'];
+                        $zylog['fxprice'] = round($fxlog['fxyj']*0.05,2);
+                        $zylog['ctime'] = time();
+                        $zylog['fxyj'] = round($fxlog['fxyj']*0.05/$zycounts,2);
+                        $zylog['fhlb'] = "价值盟友";
+                        $zylog['from'] = $fx1['id'];
+                        $zylog['fromname'] = $fx1['nickname'];
+                        $zylog['to'] = $vv['id'];
+                        $zylog['toname'] = $vv['nickname'];
+                        $zylog['status'] = 1;
+                        array_push($fxtmp,$zylog);
+                    }
+                }
             }
             //第二层分销
             if ($fx1['pid']) {
                 $fx2 = $mvip->where('id=' . $fx1['pid'])->find();
                 if ($fx2['isfx']) {
-                    $fxlog['fxyj'] = $commission->ordersCommission('fx2rate', $orderids);
+                    //$fxlog['fxyj'] = $commission->ordersCommission('fx2rate', $orderids);
+                    $fxlog['fxyj'] = $commission->ordersCommissionNew($fx2,'ej', $orderids);
+                    $fxlog['fhlb'] = "分享红利";
                     $fxlog['from'] = $vip['id'];
                     $fxlog['fromname'] = $vip['nickname'];
                     $fxlog['to'] = $fx2['id'];
@@ -1541,13 +1778,57 @@ class ShopController extends BaseController
                     //$rfxlog=$mfxlog->add($fxlog);
                     //file_put_contents('./Data/app_debug.txt','日志时间:'.date('Y-m-d H:i:s').PHP_EOL.'纪录信息:'.$rfxlog.PHP_EOL.PHP_EOL.$mfxlog->getLastSql().PHP_EOL.PHP_EOL,FILE_APPEND);
                     array_push($fxtmp, $fxlog);
+
+                    //价值盟友模块
+                    //1.获得上级分享红利的10% 多人平均分配
+                    $subvips = $mvip->where('pid=' . $fx2['id'])->select();
+                    $counts = $mvip->where('pid=' . $fx2['id'])->count();
+                    if($counts > 0)
+                    {
+                        foreach ($subvips as $kk => $vv)
+                        {
+                            $jzmylog['oid'] = $order['id'];
+                            $jzmylog['fxprice'] = round($fxlog['fxyj']*0.1,2);
+                            $jzmylog['ctime'] = time();
+                            $jzmylog['fxyj'] = round($fxlog['fxyj']*0.1/$counts,2);
+                            $jzmylog['fhlb'] = "价值盟友";
+                            $jzmylog['from'] = $fx2['id'];
+                            $jzmylog['fromname'] = $fx2['nickname'];
+                            $jzmylog['to'] = $vv['id'];
+                            $jzmylog['toname'] = $vv['nickname'];
+                            $jzmylog['status'] = 1;
+                            array_push($fxtmp,$jzmylog);
+                        }
+                    }
+                    //2.获得同一级左右分享的5%
+                    if ($fx2['pid'] > 0)
+                    {
+                        $zyvips= $mvip->where('pid='.$fx2['pid'].' and id <> '.$fx2['id'])->select();
+                        $zycounts = $mvip->where('pid='.$fx2['pid'].' and id <> '.$fx2['id'])->count();
+                        foreach ($zyvips as $kk => $vv)
+                        {
+                            $zylog['oid'] = $order['id'];
+                            $zylog['fxprice'] = round($fxlog['fxyj']*0.05,2);
+                            $zylog['ctime'] = time();
+                            $zylog['fxyj'] = round($fxlog['fxyj']*0.05/$zycounts,2);
+                            $zylog['fhlb'] = "价值盟友";
+                            $zylog['from'] = $fx2['id'];
+                            $zylog['fromname'] = $fx2['nickname'];
+                            $zylog['to'] = $vv['id'];
+                            $zylog['toname'] = $vv['nickname'];
+                            $zylog['status'] = 1;
+                            array_push($fxtmp,$zylog);
+                        }
+                    }
                 }
             }
             //第三层分销
             if ($fx2['pid']) {
                 $fx3 = $mvip->where('id=' . $fx2['pid'])->find();
                 if ($fx3['isfx']) {
-                    $fxlog['fxyj'] = $commission->ordersCommission('fx3rate', $orderids);
+                    //$fxlog['fxyj'] = $commission->ordersCommission('fx3rate', $orderids);
+                    $fxlog['fxyj'] = $commission->ordersCommissionNew($fx3,'sj', $orderids);
+                    $fxlog['fhlb'] = "分享红利";
                     $fxlog['from'] = $vip['id'];
                     $fxlog['fromname'] = $vip['nickname'];
                     $fxlog['to'] = $fx3['id'];
@@ -1557,6 +1838,48 @@ class ShopController extends BaseController
                     //$rfxlog=$mfxlog->add($fxlog);
                     //file_put_contents('./Data/app_debug.txt','日志时间:'.date('Y-m-d H:i:s').PHP_EOL.'纪录信息:'.$rfxlog.PHP_EOL.PHP_EOL.$mfxlog->getLastSql().PHP_EOL.PHP_EOL,FILE_APPEND);
                     array_push($fxtmp, $fxlog);
+
+                    //价值盟友模块
+                    //1.获得上级分享红利的10% 多人平均分配
+                    $subvips = $mvip->where('pid=' . $fx3['id'])->select();
+                    $counts = $mvip->where('pid=' . $fx3['id'])->count();
+                    if($counts > 0)
+                    {
+                        foreach ($subvips as $kk => $vv)
+                        {
+                            $jzmylog['oid'] = $order['id'];
+                            $jzmylog['fxprice'] = round($fxlog['fxyj']*0.1,2);
+                            $jzmylog['ctime'] = time();
+                            $jzmylog['fxyj'] = round($fxlog['fxyj']*0.1/$counts,2);
+                            $jzmylog['fhlb'] = "价值盟友";
+                            $jzmylog['from'] = $fx3['id'];
+                            $jzmylog['fromname'] = $fx3['nickname'];
+                            $jzmylog['to'] = $vv['id'];
+                            $jzmylog['toname'] = $vv['nickname'];
+                            $jzmylog['status'] = 1;
+                            array_push($fxtmp,$jzmylog);
+                        }
+                    }
+                    //2.获得同一级左右分享的5%
+                    if ($fx3['pid'] > 0)
+                    {
+                        $zyvips= $mvip->where('pid='.$fx3['pid'].' and id <> '.$fx3['id'])->select();
+                        $zycounts = $mvip->where('pid='.$fx3['pid'].' and id <> '.$fx3['id'])->count();
+                        foreach ($zyvips as $kk => $vv)
+                        {
+                            $zylog['oid'] = $order['id'];
+                            $zylog['fxprice'] = round($fxlog['fxyj']*0.05,2);
+                            $zylog['ctime'] = time();
+                            $zylog['fxyj'] = round($fxlog['fxyj']*0.05/$zycounts,2);
+                            $zylog['fhlb'] = "价值盟友";
+                            $zylog['from'] = $fx3['id'];
+                            $zylog['fromname'] = $fx3['nickname'];
+                            $zylog['to'] = $vv['id'];
+                            $zylog['toname'] = $vv['nickname'];
+                            $zylog['status'] = 1;
+                            array_push($fxtmp,$zylog);
+                        }
+                    }
                 }
             }
             //多层分销
@@ -1592,6 +1915,29 @@ class ShopController extends BaseController
                             $rehgfxlog = $mfxlog->add($fxlog);
                         }
                     }
+                }
+            }
+
+            //合伙人待收佣金
+            $viphhr = M('vip_hhr');
+            $hhr = $mvip->where('ishhr=1')->select();
+            $count = $mvip-> where('ishhr=1')->count();
+            $rate =$viphhr->find();
+            if($count >0)
+            {
+                foreach ($hhr as $k=>$v)
+                {
+                    $hfxlog['status'] = 1;
+                    $hfxlog['oid'] = $order['id'];
+                    $hfxlog['from'] = $_SESSION['WAP']['vipid'];
+                    $hfxlog['fxprice'] = $fxprice;
+                    $hfxlog['ctime'] = time();
+                    $hfxlog['fxyj'] = round($fxprice * $rate['bl'] / $count,2);
+                    $hfxlog['fromname'] = $_SESSION['WAP']['vip']['nickname'];
+                    $hfxlog['to'] = $v['id'];
+                    $hfxlog['toname'] = $v['nickname'];
+                    $hfxlog['fhlb'] = "合伙人分红";
+                    $mfxlog->add($hfxlog);
                 }
             }
 

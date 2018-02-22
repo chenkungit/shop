@@ -61,6 +61,7 @@ class VipController extends BaseController
         $this->checkLogin($backurl);
         $vipid = self::$WAP['vipid'];
         $data = self::$WAP['vip'];
+
         //判断签到状态
         $d1 = date('Y-m-d', time());
         $d2 = date('Y-m-d', $data['signtime']);
@@ -87,6 +88,7 @@ class VipController extends BaseController
         }
         //加上今天返现后的money
         $vip = M('Vip')->where(array('id' => $vipid))->find();
+
         $data['money'] = $vip['money'];
         //计算未使用卡券
         $today = strtotime(date('Y-m-d'));

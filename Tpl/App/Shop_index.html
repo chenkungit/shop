@@ -132,13 +132,13 @@
         </header>
         <eq name="showsub" value="1">
             <div class="pp-follow" style="padding: 0.2em 0px;background-color: rgba(255, 255, 255, 0.4);position: fixed;top: 0;z-index: 2;width:100%">
-                <!--<eq name="showfather" value='1'>-->
-                    <!--<img class="p-fopic" src="{$father['headimgurl']}">-->
-                    <!--<div class="p-focon">来自好友{$father['nickname']}的分享</div>-->
+                <eq name="showfather" value='1'>
+                    <img class="p-fopic" src="{$father['headimgurl']}">
+                    <div class="p-focon">来自好友{$father['nickname']}的分享</div>
                     <!--<else/>-->
                     <img class="p-fopic" src="{$_SESSION['WAP']['shopset']['sharepic']}">
                     <div class="p-focon">欢迎关注哟！</div>
-                <!--</eq>-->
+                </eq>
                 <div class="p-fofo"><a href="{$_SESSION['SET']['wxsuburl']}">关注我们</a></div>
                 <div class="clear"></div>
             </div>
@@ -277,8 +277,8 @@
     var share_url = "http://{$_SERVER['HTTP_HOST']}__ROOT__/App/Shop/index/ppid/{$_SESSION['WAP']['vipid']}/";
     var share_title = "{$_SESSION['WAP']['shopset']['name']}";
     var share_content = "{$_SESSION['SET']['wxsummary']}";
-    var share_img = "{$_SESSION['WAP']['shopset']['url']}{$_SESSION['WAP']['shopset']['sharepic']}";
 
+    var share_img = "{$_SESSION['WAP']['shopset']['url']}{$_SESSION['WAP']['shopset']['sharepic']}";
     wx.config({
         debug: false,
         appId: "{$jsapi['appId']}",
@@ -313,13 +313,13 @@
             //      'getLocation',
             //      'hideOptionMenu',
             //      'showOptionMenu',
-            //      'closeWindow',
-            //      'scanQRCode',
-            //      'chooseWXPay',
-            //      'openProductSpecificView',
-            //      'addCard',
-            //      'chooseCard',
-            //      'openCard'
+//                  'closeWindow',
+//                  'scanQRCode',
+//                  'chooseWXPay',
+//                  'openProductSpecificView',
+//                  'addCard',
+//                  'chooseCard',
+//                  'openCard'
         ]
     });
 
@@ -338,7 +338,7 @@
                 //alert('用户点击发送给朋友');
             },
             success: function(res) {
-                //alert('已分享');
+                alert('已分享');
             },
             cancel: function(res) {
                 //alert('已取消');

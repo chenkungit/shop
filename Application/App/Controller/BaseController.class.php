@@ -34,8 +34,8 @@ class BaseController extends Controller
         if ($_SESSION['SET']['wxdebug']) {
             //开启调试模式oauth_debug
             $_SESSION['sqmode'] = 'wecha';
-            $_SESSION['sqopenid'] = 'oojFxs4s3PSZVjL-X5UpFPhNfG0c';
-            $_SESSION['userId'] = 2;
+            $_SESSION['sqopenid'] = 'oojFxs0Hblz2KKucLs_i3PVq3mJM';
+            $_SESSION['userId'] = 515;
         }
 
         //鉴权判定流程

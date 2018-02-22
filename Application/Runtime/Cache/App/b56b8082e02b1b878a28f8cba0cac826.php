@@ -127,13 +127,11 @@
             </div>
         </header>
         <?php if(($showsub) == "1"): ?><div class="pp-follow" style="padding: 0.2em 0px;background-color: rgba(255, 255, 255, 0.4);position: fixed;top: 0;z-index: 2;width:100%">
-                <!--<?php if(($showfather) == "1"): ?>-->
-                    <!--<img class="p-fopic" src="<?php echo ($father['headimgurl']); ?>">-->
-                    <!--<div class="p-focon">来自好友<?php echo ($father['nickname']); ?>的分享</div>-->
+                <?php if(($showfather) == "1"): ?><img class="p-fopic" src="<?php echo ($father['headimgurl']); ?>">
+                    <div class="p-focon">来自好友<?php echo ($father['nickname']); ?>的分享</div>
                     <!--<?php else: ?>-->
                     <img class="p-fopic" src="<?php echo ($_SESSION['WAP']['shopset']['sharepic']); ?>">
-                    <div class="p-focon">欢迎关注哟！</div>
-                <!--<?php endif; ?>-->
+                    <div class="p-focon">欢迎关注哟！</div><?php endif; ?>
                 <div class="p-fofo"><a href="<?php echo ($_SESSION['SET']['wxsuburl']); ?>">关注我们</a></div>
                 <div class="clear"></div>
             </div><?php endif; ?>
@@ -270,8 +268,8 @@
     var share_url = "http://<?php echo ($_SERVER['HTTP_HOST']); ?>/shop/App/Shop/index/ppid/<?php echo ($_SESSION['WAP']['vipid']); ?>/";
     var share_title = "<?php echo ($_SESSION['WAP']['shopset']['name']); ?>";
     var share_content = "<?php echo ($_SESSION['SET']['wxsummary']); ?>";
-    var share_img = "<?php echo ($_SESSION['WAP']['shopset']['url']); echo ($_SESSION['WAP']['shopset']['sharepic']); ?>";
 
+    var share_img = "<?php echo ($_SESSION['WAP']['shopset']['url']); echo ($_SESSION['WAP']['shopset']['sharepic']); ?>";
     wx.config({
         debug: false,
         appId: "<?php echo ($jsapi['appId']); ?>",
@@ -306,13 +304,13 @@
             //      'getLocation',
             //      'hideOptionMenu',
             //      'showOptionMenu',
-            //      'closeWindow',
-            //      'scanQRCode',
-            //      'chooseWXPay',
-            //      'openProductSpecificView',
-            //      'addCard',
-            //      'chooseCard',
-            //      'openCard'
+//                  'closeWindow',
+//                  'scanQRCode',
+//                  'chooseWXPay',
+//                  'openProductSpecificView',
+//                  'addCard',
+//                  'chooseCard',
+//                  'openCard'
         ]
     });
 
@@ -331,7 +329,7 @@
                 //alert('用户点击发送给朋友');
             },
             success: function(res) {
-                //alert('已分享');
+                alert('已分享');
             },
             cancel: function(res) {
                 //alert('已取消');

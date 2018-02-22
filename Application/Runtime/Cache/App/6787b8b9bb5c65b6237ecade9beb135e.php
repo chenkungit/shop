@@ -45,12 +45,12 @@
 				<?php else: ?>				
 				<div class="ovflw back2">
 					<ul class="achos-ul ovflw">
-						<li class="ovflw border-b1"><h3><?php echo ($type); ?>级用户总数：<?php echo ($total); ?></h3><p>为缓解服务器压力，只显示最新50条记录。</p></li>
+						<li class="ovflw border-b1"><h3><?php echo ($type); ?>用户总数：<?php echo ($total); ?></h3><p>为缓解服务器压力，只显示最新50条记录。</p></li>
 					</ul>
 					<div class="Appbox">
 				   	<ul class="cp_list">
 				   		<?php if(is_array($cache)): $i = 0; $__LIST__ = $cache;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li style="padding-bottom: 10px;"><a href="#"><i class="iconfont tb"><img class="hot-ico" src="<?php echo ($vo["headimgurl"]); ?>" /> </i><div><h3 style="color: red;"><?php echo ($vo["nickname"]); ?></h3>
-					    	<p> 积分:<?php echo ($vo["score"]); ?>&nbsp;加入时间:<?php echo (date("Y-m-d",$vo["ctime"])); ?></p></div></a>
+					    	<p> 总消费:<?php echo ($vo["total_buy"]); ?>&nbsp;加入时间:<?php echo (date("Y-m-d",$vo["ctime"])); ?></p></div></a>
 					    	</li><?php endforeach; endif; else: echo "" ;endif; ?>		    	
 				     </ul>
 		    		</div>

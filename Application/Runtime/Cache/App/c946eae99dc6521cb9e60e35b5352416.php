@@ -52,24 +52,26 @@
 			<input type="hidden" name="totalprice" value="<?php echo ($totalprice); ?>">
 			<textarea name="items" style="display: none;"><?php echo ($allitems); ?></textarea>
 			<input type="hidden" name="isyf" value="<?php echo ($isyf); ?>">
+			<input type="hidden" name="bdgoodsid" value="">
+			<input type="hidden" name="bdgoodsprice" value="">
 		</div>
 		<!-- 商品明细  -->
 		<div class="ads-lst border-t1 border-b1 ovflw mr-b back2">
 			<p class="ads-tt border-b1">商品明细</p>
 			<?php if(is_array($cache)): foreach($cache as $key=>$vo): ?><div class="ads_orinfo ads_padding3 ovflw border-b1">
-						<div class="ads_orinfol ovflw fl">
-							<div class="ads_or_img fl">
-								<!-- 图片大小为147*101 -->
-								<img src="<?php echo ($vo["pic"]); ?>"/>
-							</div>
-							<h3><?php echo ($vo["name"]); ?></h3>
-							<p class="color3 fonts2"><?php echo ($vo["skuattr"]); ?></p>
+					<div class="ads_orinfol ovflw fl">
+						<div class="ads_or_img fl">
+							<!-- 图片大小为147*101 -->
+							<img src="<?php echo ($vo["pic"]); ?>"/>
 						</div>
-						<div class="ads_orprice ovflw ">
-							<p ><em class="fonts85">￥</em><em class="fonts18"><?php echo ($vo["price"]); ?></em></p>
-							<p class="ads_ornum fonts85">X<?php echo ($vo["num"]); ?></p>
-						</div>
-					</div><?php endforeach; endif; ?>
+						<h3><?php echo ($vo["name"]); ?></h3>
+						<p class="color3 fonts2"><?php echo ($vo["skuattr"]); ?></p>
+					</div>
+					<div class="ads_orprice ovflw ">
+						<p ><em class="fonts85">￥</em><em class="fonts18"><?php echo ($vo["price"]); ?></em></p>
+						<p class="ads_ornum fonts85">X<?php echo ($vo["num"]); ?></p>
+					</div>
+				</div><?php endforeach; endif; ?>
 			<p class="border-b1 ads_ortt3 fonts18 color3">&nbsp;使用代金卷<span class="fr"><select name="djqid" id="djqid" class="ads-sel"><option value="0" data-money="0">请选择有效代金卷</option><?php if(is_array($djq)): foreach($djq as $key=>$vo): ?><option value="<?php echo ($vo["id"]); ?>" data-money="<?php echo ($vo["money"]); ?>"><?php echo ($vo["money"]); ?>元代金卷</option><?php endforeach; endif; ?></select></span></p>
 			<p class="border-b1 ads_ortt3 fonts85">&nbsp;邮费政策：<?php if(($isyf) == "1"): ?>全场定邮<?php echo ($yf); ?>元，订单满<?php echo ($yftop); ?>元包邮。<?php else: ?>全场包邮<?php endif; ?></p>
 			<p class="border-b1 ads_ortt3 fonts85 ads"><input type="text" name="msg" class="ads_orinput" placeholder="给卖家留言"/></p>

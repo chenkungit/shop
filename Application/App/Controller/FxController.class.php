@@ -28,6 +28,7 @@ class FxController extends BaseController
         //dump($data['plv']);
         $maxlv = $data['plv'] + 3;
         $likepath = $data['path'] . '-' . $data['id'];
+
         //取出超级VIP团队总人数
         //		if($data['isfxgd']){
         //			$maphg['plv']=array('elt',$data['plv']+20);
@@ -41,7 +42,10 @@ class FxController extends BaseController
         $firstpath = $likepath;
         $mapfirst['plv'] = $firstlv;
         $mapfirst['path'] = $firstpath;
+
+
         $firstsub = $mvip->field('id,plv,path,nickname')->where($mapfirst)->select();
+
         //dump($sub);
         if ($firstsub) {
             //模糊查询第二层和第三层
@@ -89,7 +93,7 @@ class FxController extends BaseController
                 foreach ($temp as $v) {
                     array_push($tempids, $v['id']);
                 }
-                $fx1total = $commission->ordersCommission('fx1rate', $tempids);
+                $fx1total = $commission->ordersCommissionNew('fx1rate', $tempids);
             } else {
                 $fx1total = 0;
             }
