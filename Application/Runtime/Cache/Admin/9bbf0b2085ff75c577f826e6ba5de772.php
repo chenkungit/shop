@@ -150,7 +150,7 @@
 	var btntxcancel=$('.txordercancel');
 	$(btntxcancel).on('click',function(){
 		var id=$(this).data('id');
-		var funok=function(){			
+		var funok=function(){
 			$.ajax({
 				type:"post",
 				url:"<?php echo U('Admin/Wxhongbao/wxtxorderOk');?>",

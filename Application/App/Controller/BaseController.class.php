@@ -34,8 +34,8 @@ class BaseController extends Controller
         if ($_SESSION['SET']['wxdebug']) {
             //开启调试模式oauth_debug
             $_SESSION['sqmode'] = 'wecha';
-            $_SESSION['sqopenid'] = 'oojFxs0Hblz2KKucLs_i3PVq3mJM';
-            $_SESSION['userId'] = 515;
+            $_SESSION['sqopenid'] = 'owv5gsyXxBMYOjeM56e5vK33it0Y';
+            $_SESSION['userId'] = 1;
         }
 
         //鉴权判定流程
@@ -266,6 +266,7 @@ class BaseController extends Controller
         }
         return $level;
     }
+
 
     //停止不动的信息通知页面处理
     public function diemsg($status, $msg)

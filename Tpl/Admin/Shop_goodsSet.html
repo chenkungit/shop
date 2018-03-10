@@ -240,6 +240,28 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-lg-2 control-label">金果兑换</label>
+                        <div class="col-lg-4">
+                            <label>
+                                <input type="hidden" name="isapple" value="{$cache.isapple}" id="isapple">
+                                <input class="checkbox-slider slider-icon colored-darkorange" type="checkbox" id="isapplebtn" <eq name="cache.isapple" value="1">checked="checked"</eq>>
+                                <span class="text darkorange"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">赠送购物券金额</label>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" name="gwqmoney" id="gwqmoney"  value="{$cache.gwqmoney}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">购物券每日封顶金额</label>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" name="maxgwqmoney" id="maxgwqmoney"   value="{$cache.maxgwqmoney}">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-lg-2 control-label">商品详情</label>
                         <div class="col-lg-4">
                             <!--必须插入空input避免验证冲突-->
@@ -303,6 +325,30 @@ $('#isskubtn').on('click', function() {
 $('#isbdbtn').on('click', function() {
     var value = $(this).prop('checked') ? 1 : 0;
     $('#isbd').val(value);
+    if(!value)
+    {
+        $('#gwqmoney').attr("disabled",true);
+        $('#gwqmoney').val('0');
+        $('#maxgwqmoney').attr("disabled",true);
+        $('#maxgwqmoney').val('0');
+    }else
+    {
+        $('#gwqmoney').removeAttr("disabled");
+        $('#maxgwqmoney').removeAttr("disabled");
+    }
+});
+$('#isapplebtn').on('click', function() {
+    var value = $(this).prop('checked') ? 1 : 0;
+    $('#isapple').val(value);
+    if(!value)
+    {
+        $('#appleqty').attr("disabled",true);
+        $('#appleprice').attr("disabled",true);
+    }else
+    {
+        $('#appleqty').removeAttr("disabled");
+        $('#appleprice').removeAttr("disabled");
+    }
 });
 $('#ismybtn').on('click', function() {
     var value = $(this).prop('checked') ? 1 : 0;

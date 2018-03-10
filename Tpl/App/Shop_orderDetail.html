@@ -48,7 +48,11 @@
 				<p>联系方式：{$cache.vipmobile}</p>
 				<p>收货地址：{$cache.vipaddress}</p>
 				<p>邮费：{$cache.yf}元</p>
-				<p>代金卷：<notempty name='djq'>{$djq.money}元代金卷<else/>未使用</notempty></p>
+				<!--<p>代金卷：<notempty name='djq'>{$djq.money}元代金卷<else/>未使用</notempty></p>-->
+				<p>金果：<gt name='cache.appleqty' value="0">{$cache.appleqty}个<else/>未使用</gt></p>
+				<p>购物券：<gt name='cache.gwq' value="0">{$cache.gwq}元<else/>未使用</gt></p>
+				<p>现金券：<gt name='cache.cashq' value="0">{$cache.cashq}元<else/>未使用</gt></p>
+				<p>升级免付：<gt name='cache.mf' value="0">{$cache.mf}元<else/>未使用</gt></p>
 				<p>备注：{$cache.msg}</p>
 			</div>
 		</div>

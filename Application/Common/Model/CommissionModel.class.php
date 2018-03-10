@@ -59,7 +59,7 @@ class CommissionModel
 //                }
                 //根据报单总额金额计算佣金
                 $fxrate = $vipLevel[$type];
-                $total += $vv['bdgoodsprice'] * ($fxrate);
+                $total += $vv['bdgoodsmoney'] * ($fxrate);
             }
         }
         return $total;
@@ -71,6 +71,60 @@ class CommissionModel
             $fx_log = M('Fx_dslog')->where(array('oid' => array('in', in_parse_str($orderids)),'status'=>'1'));
             $data['status'] = 2;
             $fx_log->save($data);
+        }
+    }
+    //计算订单取购物券金额
+    public function orderGwq($items = array(),$vipid)
+    {
+        if (count($items) > 0)
+        {
+            foreach ($items as $kk => $vv)
+            {
+                $goods = M('Shop_goods')->where('id='.$vv['goodsid'])->find();
+                $mgwq = M('Shop_gwq');
+                $mvip = M('vip');
+                $vip = $mvip->where('id='.$vipid)->find();
+                //报单商品
+                if ($goods['isbd']==1)
+                {
+                    $gwqmoney = $goods['gwqmoney'];
+                    $maxgwqmoney = $goods['maxgwqmoney'];
+                    //查询今天已经此产品已得购物券总额
+                    $condition['user_id'] = $vipid;
+                    $condition['good_id'] = $goods['id'];
+                    $condition['time'] = date('Y-m-d');
+                    $condition['ly'] = 1;
+                    $score = $mgwq->where($condition)->sum('score');
+                    if($score + $gwqmoney <= $maxgwqmoney)
+                    {
+                        //插入购物券日志
+                        $gwq['user_id'] = $vipid;
+                        $gwq['good_id'] = $goods['id'];
+                        $gwq['score'] = $gwqmoney;
+                        $gwq['time'] = date('Y-m-d');
+                        $gwq['ly'] =1;//分享商城
+                        //更改vip购物券数量
+                        $vip['gwqmoney'] =  $vip['gwqmoney']  +  $gwqmoney;
+                        $mvip->save($vip);
+                        $mgwq->add($gwq);
+                    }
+                }
+                else//平价商城(返还50%购物券)
+                {
+
+                    $fgwq = round($goods['price']*0.5,2);
+                    //插入购物券日志
+                    $gwq['user_id'] = $vipid;
+                    $gwq['good_id'] = $goods['id'];
+                    $gwq['score'] = $fgwq;
+                    $gwq['time'] = date('Y-m-d');
+                    $gwq['ly'] =2;//平价商城
+                    //更改vip购物券数量
+                    $vip['gwqmoney'] =  $vip['gwqmoney']  +  $fgwq;
+                    $mvip->save($vip);
+                    $mgwq->add($gwq);
+                }
+            }
         }
     }
 }

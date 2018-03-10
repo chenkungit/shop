@@ -63,7 +63,7 @@
 			<div class="home-lst2 border-b1 border-t1 back2 ovflw" id="mygroupbtn">
 					<a href="#" class="ovflw home-li">
 						<span class="iconfont fl icon text-c icon-bc7">&#xe67c;</span>
-						<span class="home-tt color6">我的<?php echo ($_SESSION['SHOP']['set']['tdname']); ?>：<?php echo ($data["total_xxlink"]); ?>人</span>
+						<span class="home-tt color6">我的<?php echo ($_SESSION['SHOP']['set']['tdname']); ?>：<?php echo ($xxlinks); ?>人</span>
 						<span class="iconfont fr icon-r">&#xe661;</span>
 					</a>
 			</div>
@@ -103,11 +103,13 @@
 				<!--</a>-->
 			</div>
 			<div class="home-lst2 border-b1 border-t1 back2 ovflw">
+				<!--
 				<a href="<?php echo U('App/Fx/dslog');?>" class="border-b1 ovflw home-li">
 					<span class="iconfont fl icon text-c icon-bc1">&#xe699;</span>
 					<span class="home-tt color6">待收<?php echo ($_SESSION['SHOP']['set']['yjname']); ?></span>
 					<span class="iconfont fr icon-r">&#xe6a3</span>
 				</a>
+				-->
 				<a href="<?php echo U('App/Fx/fxlog');?>" class="border-b1 ovflw home-li">
 					<span class="iconfont fl icon text-c icon-bc2">&#xe6af;</span>
 					<span class="home-tt color6">已收<?php echo ($_SESSION['SHOP']['set']['yjname']); ?></span>
@@ -125,10 +127,12 @@
 					<!--<span class="home-tt color6">分销政策</span>-->
 					<!--<span class="iconfont fr icon-r">&#xe6a3</span>-->
 				<!--</a>-->
+				<!--
 				<a  href="tel:<?php echo ($_SESSION['WAP']['shopset']['phone']); ?>" class="ovflw home-li">
 					<span class="iconfont fl icon text-c icon-bc5">&#xe652</span>
 				<span class="home-tt color6">客服热线 <?php echo ($_SESSION['WAP']['shopset']['phone']); ?></span>
 				</a>
+				-->
 			</div>
 		</div>
 		<div class="insert1"></div>

@@ -30,10 +30,10 @@
 				<?php else: ?>
 				<div class="ovflw back2">
 					<ul class="achos-ul ovflw">
-						<li class="ovflw border-b1"><h3>历史总收获记录：<?php echo ($_SESSION['WAP']['vip']['total_xxyj']); ?></h3><p>为缓解服务器压力，只显示最新50条记录。</p></li>
+						<li class="ovflw border-b1"><h3>历史总收获记录：<?php echo ($yjcount); ?> </h3><p><h3>总金额：<?php echo ($yjtotal); ?></h3></p><p>为缓解服务器压力，只显示最新50条记录。</p></li>
 					</ul>
 					<ul class="achos-ul ovflw">
-						<?php if(is_array($cache)): $i = 0; $__LIST__ = $cache;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li class="ovflw border-b1"><h3 class="ads-h3">贡献会员：<?php echo ($vo["fromname"]); ?></h3><p>订单号：<?php echo ($vo["oid"]); ?></p><p>订单金额：<?php echo ($vo["fxprice"]); ?></p><p>获得<?php echo ($_SESSION['SHOP']['set']['yjname']); ?>：<?php echo ($vo["fxyj"]); ?></p><p class="ads-p"><?php echo (date("Y-m-d",$vo["ctime"])); ?></p></li><?php endforeach; endif; else: echo "" ;endif; ?>
+						<?php if(is_array($cache)): $i = 0; $__LIST__ = $cache;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li class="ovflw border-b1"><h3 class="ads-h3">贡献会员：<?php echo ($vo["fromname"]); ?></h3><p>订单号：<?php echo ($vo["oid"]); ?></p><p>订单金额：<?php echo ($vo["fxprice"]); ?></p><p>获得<?php echo ($_SESSION['SHOP']['set']['yjname']); ?>：<?php echo ($vo["fxyj"]); ?></p><p>佣金类型：<?php echo ($vo["fhlb"]); ?></p><p class="ads-p"><?php echo (date("Y-m-d",$vo["ctime"])); ?></p></li><?php endforeach; endif; else: echo "" ;endif; ?>
 					</ul>					
 				</div><?php endif; ?>
 		

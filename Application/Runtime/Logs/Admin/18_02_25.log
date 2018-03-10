@@ -1,0 +1,1248 @@
+[ 2018-02-25T11:51:18+08:00 ] ::1 /shop/Admin/Shop/order/status/2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0280s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order` [ RunTime:0.0070s ]
+NOTIC: [8] Undefined index: p E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 1099 行.
+SQL: SELECT * FROM `wfx_shop_order` WHERE `status` = 2 ORDER BY ctime desc LIMIT 0,20   [ RunTime:0.0010s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wfx_shop_order` WHERE `status` = 2 LIMIT 1   [ RunTime:0.0010s ]
+NOTIC: [2] Missing argument 6 for Admin\Controller\BaseController::getPage(), called in E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php on line 1125 and defined E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 91 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 103 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.024001s ]
+NOTIC: [8] Undefined variable: timeRanges E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 37 行.
+NOTIC: [8] Undefined variable: name E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 42 行.
+NOTIC: [8] Undefined variable: oid E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 45 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.016001s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.011001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.027002s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-02-25T11:55:10+08:00 ] ::1 /shop/Admin/Shop/orderDetail/id/237/status/2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order` [ RunTime:0.0060s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order_log` [ RunTime:0.0050s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+SQL: SELECT * FROM `wfx_shop_order` WHERE ( id=237 ) LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_vip` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_vip` WHERE ( id=518 ) LIMIT 1   [ RunTime:0.0000s ]
+SQL: SELECT * FROM `wfx_shop_order_log` WHERE ( oid=237 )  [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_fx_syslog` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_fx_syslog` WHERE ( oid=237 )  [ RunTime:0.0750s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.100006s ]
+NOTIC: [8] Undefined variable: status E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\5d84228a57f02c791c9386a290850748.php 第 27 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011000s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.090005s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.102005s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-02-25T11:55:43+08:00 ] ::1 /shop/Admin/Shop/order
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0220s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order` [ RunTime:0.0080s ]
+NOTIC: [8] Undefined index: p E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 1099 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 1123 行.
+SQL: SELECT * FROM `wfx_shop_order` ORDER BY ctime desc LIMIT 0,20   [ RunTime:0.0010s ]
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 1124 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `wfx_shop_order` LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [2] Missing argument 6 for Admin\Controller\BaseController::getPage(), called in E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php on line 1125 and defined E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 91 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant 尾页 - assumed '尾页' E:\xampp\htdocs\shop\ThinkPHP\Library\Util\Pagecms.class.php 第 118 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.033002s ]
+NOTIC: [8] Undefined variable: timeRanges E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 37 行.
+NOTIC: [8] Undefined variable: name E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 42 行.
+NOTIC: [8] Undefined variable: oid E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 45 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.021002s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.016001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.036003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.009000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.009000s ]
+
+[ 2018-02-25T12:29:43+08:00 ] ::1 /shop/Admin/Shop/goods
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_goods` [ RunTime:0.0080s ]
+NOTIC: [8] Undefined index: p E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 97 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 104 行.
+SQL: SELECT * FROM `wfx_shop_goods` LIMIT 0,20   [ RunTime:0.0010s ]
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 105 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `wfx_shop_goods` LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [2] Missing argument 6 for Admin\Controller\BaseController::getPage(), called in E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php on line 106 and defined E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 91 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 103 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.019001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008000s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.012001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.021001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-02-25T12:29:48+08:00 ] ::1 /shop/Admin/Shop/goodsSet/id/17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_goods` [ RunTime:0.0060s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_label` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_shop_label`  [ RunTime:0.0340s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_cate` [ RunTime:0.0080s ]
+NOTIC: [2] Missing argument 4 for appTree(), called in E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php on line 164 and defined E:\xampp\htdocs\shop\Application\Common\Common\function.php 第 279 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Common\Common\function.php 第 281 行.
+SQL: SELECT `id`,`pid`,`name`,`sorts`,concat(path,'-',id) as bpath FROM `wfx_shop_cate` ORDER BY sorts desc  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `wfx_shop_goods` WHERE ( id=17 ) LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.066004s ]
+NOTIC: [8] Undefined index: _child E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\2f73b4e2349942aaa817bec043f52f9e.php 第 36 行.
+NOTIC: [8] Undefined index: _child E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\2f73b4e2349942aaa817bec043f52f9e.php 第 36 行.
+NOTIC: [8] Undefined index: _child E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\2f73b4e2349942aaa817bec043f52f9e.php 第 36 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015001s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.051003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.066004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-02-25T12:30:20+08:00 ] ::1 /shop/Admin/Shop/goodsSet
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0090s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0090s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_goods` [ RunTime:0.0080s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+SQL: UPDATE `wfx_shop_goods` SET `cid`='20',`name`='沁颜光感面膜',`indexpic`='160',`listpic`='160',`pic`='160',`album`='159,',`unit`='kg',`price`='200',`oprice`='250',`fx1rate`='25',`fx2rate`='12',`fx3rate`='10',`num`='2321260',`issku`='0',`ismy`='1',`issells`='1',`dissells`='3221373',`cashback`='0',`backratio`='0',`lid`='',`summary`='测试专用',`sorts`='0',`isbd`='1',`isapple`='0',`content`='&lt;p&gt;&lt;img width=&quot;100%&quot; src=&quot;/Public/Cms/ueditor/php/upload//img/20150620/1434731886104627.jpg&quot; style=&quot;float:none;&quot; title=&quot;20150619184505.jpg&quot;/&gt;&lt;/p&gt;&lt;p&gt;&lt;img width=&quot;100%&quot; src=&quot;/Public/Cms/ueditor/php/upload//img/20150620/1434731890844584.jpg&quot; style=&quot;float:none;&quot; title=&quot;ÇßÑÕÃæÄ¤º£±¨2.jpg&quot;/&gt;&lt;/p&gt;&lt;p&gt;&lt;img width=&quot;100%&quot; src=&quot;/Public/Cms/ueditor/php/upload//img/20150620/1434731890122313.jpg&quot; style=&quot;float:none;&quot; title=&quot;ͼ2.jpg&quot;/&gt;&lt;/p&gt;&lt;p&gt;&lt;img width=&quot;100%&quot; src=&quot;/Public/Cms/ueditor/php/upload//img/20150620/1434731891113057.jpg&quot; style=&quot;float:none;&quot; title=&quot;ͼ3.jpg&quot;/&gt;&lt;/p&gt;&lt;p&gt;&lt;img width=&quot;100%&quot; src=&quot;/Public/Cms/ueditor/php/upload//img/20150620/1434731892124232.jpg&quot; style=&quot;float:none;&quot; title=&quot;ͼ4.jpg&quot;/&gt;&lt;/p&gt;&lt;p&gt;&lt;img width=&quot;100%&quot; src=&quot;/Public/Cms/ueditor/php/upload//img/20150620/1434731892939383.jpg&quot; style=&quot;float:none;&quot; title=&quot;ͼ6.jpg&quot;/&gt;&lt;/p&gt;&lt;p&gt;&lt;img width=&quot;100%&quot; src=&quot;/Public/Cms/ueditor/php/upload//img/20150620/1434731893127460.jpg&quot; style=&quot;float:none;&quot; title=&quot;ͼ7.jpg&quot;/&gt;&lt;/p&gt;' WHERE `id` = 17 [ RunTime:0.0740s ]
+
+[ 2018-02-25T12:30:20+08:00 ] ::1 /shop/Admin/Index/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0020s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_user_oath` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `wfx_user_oath`  [ RunTime:0.1030s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.032002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.032002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-02-25T12:31:12+08:00 ] ::1 /shop/Admin/Shop/order/status/2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order` [ RunTime:0.0100s ]
+NOTIC: [8] Undefined index: p E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 1099 行.
+SQL: SELECT * FROM `wfx_shop_order` WHERE `status` = 2 ORDER BY ctime desc LIMIT 0,20   [ RunTime:0.0020s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wfx_shop_order` WHERE `status` = 2 LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [2] Missing argument 6 for Admin\Controller\BaseController::getPage(), called in E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php on line 1125 and defined E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 91 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 103 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.030002s ]
+NOTIC: [8] Undefined variable: timeRanges E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 37 行.
+NOTIC: [8] Undefined variable: name E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 42 行.
+NOTIC: [8] Undefined variable: oid E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 45 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.016001s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.017001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.032002s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-02-25T12:31:17+08:00 ] ::1 /shop/Admin/Shop/orderDeliver
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order` [ RunTime:0.0060s ]
+SQL: UPDATE `wfx_shop_order` SET `status`='3' WHERE ( id=237 ) [ RunTime:0.0840s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order_log` [ RunTime:0.0050s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order_syslog` [ RunTime:0.0050s ]
+SQL: INSERT INTO `wfx_shop_order_log` (`oid`,`msg`,`ctime`) VALUES ('237','订单已发货','1519533076') [ RunTime:0.0690s ]
+NOTIC: [8] Undefined variable: cache E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 1416 行.
+SQL: INSERT INTO `wfx_shop_order_syslog` (`oid`,`msg`,`ctime`,`type`,`paytype`) VALUES ('237','订单已发货','1519533076','3',NULL) [ RunTime:0.0530s ]
+SQL: SELECT * FROM `wfx_shop_order` WHERE ( id=237 ) LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_vip` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_vip` WHERE `id` = 518 LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_wx_template` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_wx_template` WHERE `templateidshort` = 'OPENTM201541214' LIMIT 1   [ RunTime:0.0010s ]
+
+[ 2018-02-25T12:31:17+08:00 ] ::1 /shop/Admin/Index/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_user_oath` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `wfx_user_oath`  [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.039002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.039002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-02-25T12:31:17+08:00 ] ::1 /shop/Admin/Shop/order/status/2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0090s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002001s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order` [ RunTime:0.0090s ]
+NOTIC: [8] Undefined index: p E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 1099 行.
+SQL: SELECT * FROM `wfx_shop_order` WHERE `status` = 2 ORDER BY ctime desc LIMIT 0,20   [ RunTime:0.0020s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wfx_shop_order` WHERE `status` = 2 LIMIT 1   [ RunTime:0.0030s ]
+NOTIC: [2] Missing argument 6 for Admin\Controller\BaseController::getPage(), called in E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php on line 1125 and defined E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 91 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 103 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.036002s ]
+NOTIC: [8] Undefined variable: timeRanges E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 37 行.
+NOTIC: [8] Undefined variable: name E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 42 行.
+NOTIC: [8] Undefined variable: oid E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 45 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.020001s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.021002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.039002s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-02-25T12:44:26+08:00 ] ::1 /shop/Admin/Vip/card/type/2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8] Undefined variable: status E:\xampp\htdocs\shop\Application\Admin\Controller\VipController.class.php 第 1018 行.
+SQL: SHOW COLUMNS FROM `wfx_vip_card` [ RunTime:0.0040s ]
+NOTIC: [8] Undefined index: p E:\xampp\htdocs\shop\Application\Admin\Controller\VipController.class.php 第 1020 行.
+SQL: SELECT * FROM `wfx_vip_card` WHERE `type` = 2 ORDER BY id desc LIMIT 0,20   [ RunTime:0.0010s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wfx_vip_card` WHERE `type` = 2 LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [2] Missing argument 6 for Admin\Controller\BaseController::getPage(), called in E:\xampp\htdocs\shop\Application\Admin\Controller\VipController.class.php on line 1034 and defined E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 91 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 103 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.021001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.031002s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.010001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.039003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.006000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.006000s ]
+
+[ 2018-02-25T12:44:28+08:00 ] ::1 /shop/Admin/Vip/cardSet
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_card` [ RunTime:0.0050s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.005001s ]
+NOTIC: [8] Undefined variable: cache E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\d55669f968816388e9ebcf2111808cce.php 第 29 行.
+NOTIC: [8] Undefined variable: cache E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\d55669f968816388e9ebcf2111808cce.php 第 40 行.
+NOTIC: [8] Undefined variable: cache E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\d55669f968816388e9ebcf2111808cce.php 第 41 行.
+NOTIC: [8] Undefined variable: cache E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\d55669f968816388e9ebcf2111808cce.php 第 48 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.005001s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.001000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.005001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-02-25T12:44:51+08:00 ] ::1 /shop/Admin/Vip/cardSet
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_card` [ RunTime:0.0090s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+SQL: INSERT INTO `wfx_vip_card` (`id`,`type`,`money`,`usemoney`,`ctime`,`stime`,`etime`,`cardno`,`cardpwd`) VALUES ('0','2','10','20','1519533891','1519488000','1519747200','1208837424','3KUNGARSLY') [ RunTime:0.0000s ]
+
+[ 2018-02-25T12:44:51+08:00 ] ::1 /shop/Admin/Index/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0090s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_user_oath` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `wfx_user_oath`  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.034002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.034002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2018-02-25T12:44:54+08:00 ] ::1 /shop/Admin/Vip/card/type/2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined variable: status E:\xampp\htdocs\shop\Application\Admin\Controller\VipController.class.php 第 1018 行.
+SQL: SHOW COLUMNS FROM `wfx_vip_card` [ RunTime:0.0070s ]
+NOTIC: [8] Undefined index: p E:\xampp\htdocs\shop\Application\Admin\Controller\VipController.class.php 第 1020 行.
+SQL: SELECT * FROM `wfx_vip_card` WHERE `type` = 2 ORDER BY id desc LIMIT 0,20   [ RunTime:0.0010s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wfx_vip_card` WHERE `type` = 2 LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [2] Missing argument 6 for Admin\Controller\BaseController::getPage(), called in E:\xampp\htdocs\shop\Application\Admin\Controller\VipController.class.php on line 1034 and defined E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 91 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 103 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.017001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008000s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.011001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.018001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-02-25T12:45:06+08:00 ] ::1 /shop/Admin/vip/sendCard
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0090s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_card` [ RunTime:0.0100s ]
+SQL: SHOW COLUMNS FROM `wfx_vip` [ RunTime:0.0100s ]
+SQL: SELECT * FROM `wfx_vip` WHERE ( id=518 ) LIMIT 1   [ RunTime:0.0030s ]
+SQL: UPDATE `wfx_vip_card` SET `vipid`='518',`status`='1' WHERE ( id=10 ) [ RunTime:0.0000s ]
+
+[ 2018-02-25T12:45:06+08:00 ] ::1 /shop/Admin/Index/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0120s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0090s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0110s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0030s ]
+SQL: SHOW COLUMNS FROM `wfx_user_oath` [ RunTime:0.0120s ]
+SQL: SELECT * FROM `wfx_user_oath`  [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.040003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.040003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-02-25T12:45:06+08:00 ] ::1 /shop/Admin/Vip/card/type/2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.017001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined variable: status E:\xampp\htdocs\shop\Application\Admin\Controller\VipController.class.php 第 1018 行.
+SQL: SHOW COLUMNS FROM `wfx_vip_card` [ RunTime:0.0050s ]
+NOTIC: [8] Undefined index: p E:\xampp\htdocs\shop\Application\Admin\Controller\VipController.class.php 第 1020 行.
+SQL: SELECT * FROM `wfx_vip_card` WHERE `type` = 2 ORDER BY id desc LIMIT 0,20   [ RunTime:0.0010s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wfx_vip_card` WHERE `type` = 2 LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [2] Missing argument 6 for Admin\Controller\BaseController::getPage(), called in E:\xampp\htdocs\shop\Application\Admin\Controller\VipController.class.php on line 1034 and defined E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 91 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 103 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.023002s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014001s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.010000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.023001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
+[ 2018-02-25T13:12:22+08:00 ] ::1 /shop/Admin/Shop/order/status/2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: p E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 1099 行.
+SQL: SELECT * FROM `wfx_shop_order` WHERE `status` = 2 ORDER BY ctime desc LIMIT 0,20   [ RunTime:0.0010s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wfx_shop_order` WHERE `status` = 2 LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [2] Missing argument 6 for Admin\Controller\BaseController::getPage(), called in E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php on line 1125 and defined E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 91 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 103 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.020002s ]
+NOTIC: [8] Undefined variable: timeRanges E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 37 行.
+NOTIC: [8] Undefined variable: name E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 42 行.
+NOTIC: [8] Undefined variable: oid E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 45 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013001s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.011000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.023001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-02-25T13:27:05+08:00 ] ::1 /shop/Admin/Shop/order/status/2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order` [ RunTime:0.0050s ]
+NOTIC: [8] Undefined index: p E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 1099 行.
+SQL: SELECT * FROM `wfx_shop_order` WHERE `status` = 2 ORDER BY ctime desc LIMIT 0,20   [ RunTime:0.0010s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wfx_shop_order` WHERE `status` = 2 LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [2] Missing argument 6 for Admin\Controller\BaseController::getPage(), called in E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php on line 1125 and defined E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 91 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 103 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.020001s ]
+NOTIC: [8] Undefined variable: timeRanges E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 37 行.
+NOTIC: [8] Undefined variable: name E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 42 行.
+NOTIC: [8] Undefined variable: oid E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 45 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013000s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.011001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.023001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-02-25T13:27:09+08:00 ] ::1 /shop/Admin/Shop/orderDeliver
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order` [ RunTime:0.0070s ]
+SQL: UPDATE `wfx_shop_order` SET `status`='3' WHERE ( id=239 ) [ RunTime:0.1110s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order_log` [ RunTime:0.0060s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order_syslog` [ RunTime:0.0060s ]
+SQL: INSERT INTO `wfx_shop_order_log` (`oid`,`msg`,`ctime`) VALUES ('239','订单已发货','1519536429') [ RunTime:0.0700s ]
+NOTIC: [8] Undefined variable: cache E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 1416 行.
+SQL: INSERT INTO `wfx_shop_order_syslog` (`oid`,`msg`,`ctime`,`type`,`paytype`) VALUES ('239','订单已发货','1519536429','3',NULL) [ RunTime:0.0310s ]
+SQL: SELECT * FROM `wfx_shop_order` WHERE ( id=239 ) LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_vip` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_vip` WHERE `id` = 1000 LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_wx_template` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_wx_template` WHERE `templateidshort` = 'OPENTM201541214' LIMIT 1   [ RunTime:0.0000s ]
+
+[ 2018-02-25T13:27:09+08:00 ] ::1 /shop/Admin/Index/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0090s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_user_oath` [ RunTime:0.0100s ]
+SQL: SELECT * FROM `wfx_user_oath`  [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.026001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.026001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001001s ]
+
+[ 2018-02-25T13:27:09+08:00 ] ::1 /shop/Admin/Shop/order/status/2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order` [ RunTime:0.0080s ]
+NOTIC: [8] Undefined index: p E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 1099 行.
+SQL: SELECT * FROM `wfx_shop_order` WHERE `status` = 2 ORDER BY ctime desc LIMIT 0,20   [ RunTime:0.0000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wfx_shop_order` WHERE `status` = 2 LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [2] Missing argument 6 for Admin\Controller\BaseController::getPage(), called in E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php on line 1125 and defined E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 91 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 103 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.022001s ]
+NOTIC: [8] Undefined variable: timeRanges E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 37 行.
+NOTIC: [8] Undefined variable: name E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 42 行.
+NOTIC: [8] Undefined variable: oid E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 45 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014000s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.013001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.026001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-02-25T13:32:29+08:00 ] ::1 /shop/Admin/Shop/order/status/2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0120s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: p E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 1099 行.
+SQL: SELECT * FROM `wfx_shop_order` WHERE `status` = 2 ORDER BY ctime desc LIMIT 0,20   [ RunTime:0.0010s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wfx_shop_order` WHERE `status` = 2 LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [2] Missing argument 6 for Admin\Controller\BaseController::getPage(), called in E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php on line 1125 and defined E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 91 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 103 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.021001s ]
+NOTIC: [8] Undefined variable: timeRanges E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 37 行.
+NOTIC: [8] Undefined variable: name E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 42 行.
+NOTIC: [8] Undefined variable: oid E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 45 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013001s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.011000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.023001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-02-25T13:32:46+08:00 ] ::1 /shop/Admin/Shop/order/status/2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: p E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 1099 行.
+SQL: SELECT * FROM `wfx_shop_order` WHERE `status` = 2 ORDER BY ctime desc LIMIT 0,20   [ RunTime:0.0000s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wfx_shop_order` WHERE `status` = 2 LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [2] Missing argument 6 for Admin\Controller\BaseController::getPage(), called in E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php on line 1125 and defined E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 91 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 103 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.020001s ]
+NOTIC: [8] Undefined variable: timeRanges E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 37 行.
+NOTIC: [8] Undefined variable: name E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 42 行.
+NOTIC: [8] Undefined variable: oid E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 45 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012000s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.011001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.022001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-02-25T13:32:48+08:00 ] ::1 /shop/Admin/Shop/order/status/3
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order` [ RunTime:0.0090s ]
+NOTIC: [8] Undefined index: p E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 1099 行.
+SQL: SELECT * FROM `wfx_shop_order` WHERE `status` = 3 ORDER BY ctime desc LIMIT 0,20   [ RunTime:0.0010s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wfx_shop_order` WHERE `status` = 3 LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [2] Missing argument 6 for Admin\Controller\BaseController::getPage(), called in E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php on line 1125 and defined E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 91 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 103 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.031001s ]
+NOTIC: [8] Undefined variable: timeRanges E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 37 行.
+NOTIC: [8] Undefined variable: name E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 42 行.
+NOTIC: [8] Undefined variable: oid E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 45 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.020001s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.016001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.035002s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
+[ 2018-02-25T13:32:58+08:00 ] ::1 /shop/Admin/Shop/order/status/5
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: p E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 1099 行.
+SQL: SELECT * FROM `wfx_shop_order` WHERE `status` = 5 ORDER BY ctime desc LIMIT 0,20   [ RunTime:0.0010s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wfx_shop_order` WHERE `status` = 5 LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [2] Missing argument 6 for Admin\Controller\BaseController::getPage(), called in E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php on line 1125 and defined E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 91 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 103 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.019001s ]
+NOTIC: [8] Undefined variable: timeRanges E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 37 行.
+NOTIC: [8] Undefined variable: name E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 42 行.
+NOTIC: [8] Undefined variable: oid E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 45 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012001s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.010001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.021002s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-02-25T13:33:00+08:00 ] ::1 /shop/Admin/Shop/order/status/2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: p E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 1099 行.
+SQL: SELECT * FROM `wfx_shop_order` WHERE `status` = 2 ORDER BY ctime desc LIMIT 0,20   [ RunTime:0.0010s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wfx_shop_order` WHERE `status` = 2 LIMIT 1   [ RunTime:0.0000s ]
+NOTIC: [2] Missing argument 6 for Admin\Controller\BaseController::getPage(), called in E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php on line 1125 and defined E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 91 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 103 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.021001s ]
+NOTIC: [8] Undefined variable: timeRanges E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 37 行.
+NOTIC: [8] Undefined variable: name E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 42 行.
+NOTIC: [8] Undefined variable: oid E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 45 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012000s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.011001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.022001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2018-02-25T13:33:05+08:00 ] ::1 /shop/Admin/Shop/orderDeliver
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order` [ RunTime:0.0070s ]
+SQL: UPDATE `wfx_shop_order` SET `status`='3' WHERE ( id=240 ) [ RunTime:0.1280s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order_log` [ RunTime:0.0080s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order_syslog` [ RunTime:0.0050s ]
+SQL: INSERT INTO `wfx_shop_order_log` (`oid`,`msg`,`ctime`) VALUES ('240','订单已发货','1519536785') [ RunTime:0.0790s ]
+NOTIC: [8] Undefined variable: cache E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 1416 行.
+SQL: INSERT INTO `wfx_shop_order_syslog` (`oid`,`msg`,`ctime`,`type`,`paytype`) VALUES ('240','订单已发货','1519536785','3',NULL) [ RunTime:0.0320s ]
+SQL: SELECT * FROM `wfx_shop_order` WHERE ( id=240 ) LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_vip` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_vip` WHERE `id` = 1000 LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_wx_template` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_wx_template` WHERE `templateidshort` = 'OPENTM201541214' LIMIT 1   [ RunTime:0.0000s ]
+
+[ 2018-02-25T13:33:05+08:00 ] ::1 /shop/Admin/Index/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_user_oath` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_user_oath`  [ RunTime:0.0230s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.035002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.035002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2018-02-25T13:33:06+08:00 ] ::1 /shop/Admin/Shop/order/status/2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004001s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_cms_set` [ RunTime:0.0080s ]
+SQL: SELECT * FROM `wfx_cms_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_vip_set` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `wfx_vip_set` LIMIT 1   [ RunTime:0.0010s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order` [ RunTime:0.0080s ]
+NOTIC: [8] Undefined index: p E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php 第 1099 行.
+SQL: SELECT * FROM `wfx_shop_order` WHERE `status` = 2 ORDER BY ctime desc LIMIT 0,20   [ RunTime:0.0010s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `wfx_shop_order` WHERE `status` = 2 LIMIT 1   [ RunTime:0.0010s ]
+NOTIC: [2] Missing argument 6 for Admin\Controller\BaseController::getPage(), called in E:\xampp\htdocs\shop\Application\Admin\Controller\ShopController.class.php on line 1125 and defined E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 91 行.
+NOTIC: [8] Undefined variable: map E:\xampp\htdocs\shop\Application\Admin\Controller\BaseController.class.php 第 103 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.022002s ]
+NOTIC: [8] Undefined variable: timeRanges E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 37 行.
+NOTIC: [8] Undefined variable: name E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 42 行.
+NOTIC: [8] Undefined variable: oid E:\xampp\htdocs\shop\Application\Runtime\Cache\Admin\1de6446ae7d2b2aec8b988d31334127b.php 第 45 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014001s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.013000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.026001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+

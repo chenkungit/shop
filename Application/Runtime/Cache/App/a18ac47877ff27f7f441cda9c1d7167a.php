@@ -50,10 +50,10 @@
             <div class="clr"></div>
             <div class="home-panel ovflw">
                 <div class="fl home-item"><a href="javascript:void(0)" class="home-br text-c"><span id="home-jf"><?php echo ($data["score"]); ?></span><span class="home-add" id="add-jf"></span><p>我的金果</p></a></div>
-                <?php if(($isqiandao) == "1"): ?><div class="fl home-item"><a href="javascript:void(0)" class="home-br text-c"><span id="home-jy"><?php echo ($data["cur_exp"]); ?></span><span class="home-add" id="add-jy"></span><p>我的经验</p></a></div>
+                <?php if(($isqiandao) == "1"): ?><div class="fl home-item"><a href="javascript:void(0)" class="home-br text-c"><span id="home-jy"><?php echo ($data["gwqmoney"]); ?></span><span class="home-add" id="add-jy"></span><p>我的购物券</p></a></div>
                     <?php else: ?>
                     <div class="fl home-item"><a href="javascript:void(0)" class="home-br text-c"><span><?php echo ($data["total_xxlink"]); ?></span><p>我的团队</p></a></div><?php endif; ?>
-                <div class="fl home-item"><a href="<?php echo U('App/Vip/card');?>" class="text-c"><span><?php echo ($data["cardnum"]); ?></span><p>我的卡券</p></a></div>
+                <div class="fl home-item"><a href="<?php echo U('App/Vip/card');?>" class="text-c"><span><?php echo ($data["cashq"]); ?></span><p>我的现金券</p></a></div>
             </div>
         </div>
     </div>
@@ -113,11 +113,13 @@
                 <span class="home-tt color6">关于我们</span>
                 <span class="iconfont fr icon-r">&#xe6a3</span>
             </a>
+            <!--
             <a href="<?php echo ($_SESSION['SET']['wxsuburl']); ?>" class="ovflw home-li">
                 <span class="iconfont fl icon text-c icon-bc7">&#xe6f1</span>
                 <span class="home-tt color6">关注我们</span>
                 <span class="iconfont fr icon-r">&#xe6a3</span>
             </a>
+            -->
         </div>
     </div>
     <!-- 底部导航 -->
@@ -135,44 +137,49 @@
 			 $('#'+actname).css('color','#19a5f3');
 		</script>
     <script>
-    $('#home-qd').click(function() {
-        $.getJSON("<?php echo U('App/Vip/sign');?>", {}, function(e) {
-            if (e.status == '1') {
-                if (e.data.score > 0) {
-                    var jf = parseInt($('#home-jf').text());
-                    var add_if = parseInt(e.data.score);
+    $(function () {
 
-                    $('#add-jf').html("+" + add_if);
-                    $('#add-jf').animate({
-                        opacity: 0
-                    }, 2000, 'ease-out', function() {
-                        $('#add-jf').html("")
-                    });
+        $('#home-qd').click(function() {
+            $.getJSON("<?php echo U('App/Vip/sign');?>", {}, function(e) {
+                if (e.status == '1') {
+                    if (e.data.score > 0) {
+                        var jf = parseInt($('#home-jf').text());
+                        var add_if = parseInt(e.data.score);
 
-                    var jf_obj = new countUp("home-jf", jf + add_if);
-                    jf_obj.start();
+                        $('#add-jf').html("+" + add_if);
+                        $('#add-jf').animate({
+                            opacity: 0
+                        }, 2000, 'ease-out', function() {
+                            $('#add-jf').html("")
+                        });
+
+                        var jf_obj = new countUp("home-jf", jf + add_if);
+                        jf_obj.start();
+                    }
+                    if (e.data.exp > 0) {
+                        var jy = parseInt($('#home-jy').text());
+                        var add_jy = parseInt(e.data.exp);
+
+                        $('#add-jy').html("+" + add_jy);
+                        $('#add-jy').animate({
+                            opacity: 0
+                        }, 2000, 'ease-out', function() {
+                            $('#add-jy').html("")
+                        });
+
+                        var jy_obj = new countUp("home-jy", jy + add_jy);
+                        jy_obj.start();
+                    }
+                    $('.home-yq').show();
+                    $('#levelname').text(e.data.levelname);
+                } else {
+                    zbb_msg(e.msg);
                 }
-                if (e.data.exp > 0) {
-                    var jy = parseInt($('#home-jy').text());
-                    var add_jy = parseInt(e.data.exp);
-
-                    $('#add-jy').html("+" + add_jy);
-                    $('#add-jy').animate({
-                        opacity: 0
-                    }, 2000, 'ease-out', function() {
-                        $('#add-jy').html("")
-                    });
-
-                    var jy_obj = new countUp("home-jy", jy + add_jy);
-                    jy_obj.start();
-                }
-                $('.home-yq').show();
-                $('#levelname').text(e.data.levelname);
-            } else {
-                zbb_msg(e.msg);
-            }
+            });
         });
-    });
+
+    })
+
     </script>
     <!--通用分享-->
     <script type="text/javascript">

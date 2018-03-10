@@ -58,6 +58,9 @@
                 <li class="border-b1 ovflw"><span class="fl">提现金额</span>
                     <input type="text" name="txprice" value="<?php echo ($_SESSION['vipset']['tx_money']); ?>" placeholder="请输入提现金额" id="txprice">
                 </li>
+                <li class="border-b1 ovflw"><span class="fl">实际扣款</span>
+                    <input type="text" class= "color3" name="kkprice" value="" readonly id="kkprice">
+                </li>
                 <li class="border-b1 ovflw"><span class="fl">姓名</span>
                     <input type="text" name="txname" value="<?php echo ($vip["txname"]); ?>" placeholder="请输入姓名" id="txname">
                 </li>
@@ -120,12 +123,17 @@ $('.ads-btn').click(function() {
     var txvm = Number($('#txvm').html());
     var txtop = Number($('#txtop').html());
     var txprice = Number($('#txprice').val());
+    var kkprice = Number($('#kkprice').val());
     if (!txprice) {
         App_gmuMsg('请填写提现金额！');
         return false;
     }
-    if (txprice > txvm) {
-        App_gmuMsg('提现金额不能大于会员帐户余额！');
+    if (!kkprice) {
+        App_gmuMsg('扣款金额不能为空！');
+        return false;
+    }
+    if (kkprice > txvm) {
+        App_gmuMsg('扣款金额不能大于会员帐户余额！');
         return false;
     }
     if (txprice < txtop) {
@@ -175,5 +183,11 @@ $('.yh-btn').click(function() {
     $('.yinhang').show();
     $('.weixin').hide();
     $('input[name="type"]').val('yh');
+});
+$('#txprice').change(function() {
+    var txprice = Number($('#txprice').val());
+    //扣20%手续费
+    var kkprice = txprice*1.2;
+    $('#kkprice').val(kkprice.toFixed(2));
 });
 </script>

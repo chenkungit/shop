@@ -281,11 +281,11 @@
             'onMenuShareTimeline',
             'onMenuShareAppMessage',
             'onMenuShareQQ',
-            'onMenuShareWeibo',
-            'hideMenuItems',
-            'showMenuItems',
-            'hideAllNonBaseMenuItem',
-            'showAllNonBaseMenuItem',
+            //'onMenuShareWeibo',
+            //'hideMenuItems',
+            //'showMenuItems',
+            //'hideAllNonBaseMenuItem',
+            //'showAllNonBaseMenuItem',
             //      'translateVoice',
             //      'startRecord',
             //      'stopRecord',
@@ -329,7 +329,39 @@
                 //alert('用户点击发送给朋友');
             },
             success: function(res) {
-                alert('已分享');
+
+                var tourl="<?php echo U('App/Vip/share');?>";
+                $.ajax({
+                    type:"post",
+                    url:tourl,
+                    dataType:'json',
+                    success:function(info){
+                        if(info['status']==3){
+                            var fun=function(){
+                                window.location.href=basketloginurl;
+                            }
+                            App_gmuMsg(info['msg'],fun);
+                            return false;
+                        }else if(info['status']==2){
+                            var fun=function(){
+                                window.location.href=basketurl;
+                            }
+                            App_gmuMsg(info['msg'],fun);
+                            return false;
+                        }else if(info['status']==1){
+//                            var fun=function(){
+//                                window.location.href="<?php echo U('App/Shop/index');?>";
+//                            }
+                            //alert("ss");
+                            App_gmuMsg(info['msg']);
+                            return false;
+                        }else{
+                            App_gmuMsg(info['msg']);
+                            return false;
+                        }
+                    }
+                });
+                //alert('已分享5555');
             },
             cancel: function(res) {
                 //alert('已取消');
@@ -347,10 +379,12 @@
                 //alert('用户点击分享到朋友圈');
             },
             success: function(res) {
-                //alert('已分享');
+                //alert('已分享1');
+
+
             },
             cancel: function(res) {
-                //alert('已取消');
+                alert('已取消');
             },
             fail: function(res) {
                 //alert(JSON.stringify(res));

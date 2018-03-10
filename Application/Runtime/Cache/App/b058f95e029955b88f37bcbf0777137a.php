@@ -46,7 +46,11 @@
 				<p>联系方式：<?php echo ($cache["vipmobile"]); ?></p>
 				<p>收货地址：<?php echo ($cache["vipaddress"]); ?></p>
 				<p>邮费：<?php echo ($cache["yf"]); ?>元</p>
-				<p>代金卷：<?php if(!empty($djq)): echo ($djq["money"]); ?>元代金卷<?php else: ?>未使用<?php endif; ?></p>
+				<!--<p>代金卷：<?php if(!empty($djq)): echo ($djq["money"]); ?>元代金卷<?php else: ?>未使用<?php endif; ?></p>-->
+				<p>金果：<?php if(($cache["appleqty"]) > "0"): echo ($cache["appleqty"]); ?>个<?php else: ?>未使用<?php endif; ?></p>
+				<p>购物券：<?php if(($cache["gwq"]) > "0"): echo ($cache["gwq"]); ?>元<?php else: ?>未使用<?php endif; ?></p>
+				<p>现金券：<?php if(($cache["cashq"]) > "0"): echo ($cache["cashq"]); ?>元<?php else: ?>未使用<?php endif; ?></p>
+				<p>升级免付：<?php if(($cache["mf"]) > "0"): echo ($cache["mf"]); ?>元<?php else: ?>未使用<?php endif; ?></p>
 				<p>备注：<?php echo ($cache["msg"]); ?></p>
 			</div>
 		</div>

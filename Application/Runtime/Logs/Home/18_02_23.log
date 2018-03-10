@@ -1,0 +1,54 @@
+[ 2018-02-23T20:36:51+08:00 ] 192.168.2.143 /shop/Home/Wxpay/pay/oid/20180222160721-229
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_shop_order` WHERE `oid` = '20180222160721-229' LIMIT 1   [ RunTime:0.0010s ]
+NOTIC: [8] Use of undefined constant CURLOP_TIMEOUT - assumed 'CURLOP_TIMEOUT' E:\xampp\htdocs\shop\ThinkPHP\Library\Util\Wx\Wxpaysdk.class.php 第 234 行.
+NOTIC: [2] curl_setopt() expects parameter 2 to be long, string given E:\xampp\htdocs\shop\ThinkPHP\Library\Util\Wx\Wxpaysdk.class.php 第 234 行.
+NOTIC: [2] curl_close(): 33 is not a valid cURL handle resource E:\xampp\htdocs\shop\ThinkPHP\Library\Util\Wx\Wxpaysdk.class.php 第 253 行.
+NOTIC: [8] Undefined index: prepay_id E:\xampp\htdocs\shop\ThinkPHP\Library\Util\Wx\Wxpaysdk.class.php 第 61 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+
+[ 2018-02-23T20:41:35+08:00 ] 192.168.2.101 /shop/Home/Wxpay/pay/oid/20180223204135-236
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `wfx_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_set` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `wfx_shop_set` LIMIT 1   [ RunTime:0.0000s ]
+SQL: SHOW COLUMNS FROM `wfx_shop_order` [ RunTime:0.0060s ]
+SQL: SELECT * FROM `wfx_shop_order` WHERE `oid` = '20180223204135-236' LIMIT 1   [ RunTime:0.0010s ]
+NOTIC: [8] Use of undefined constant CURLOP_TIMEOUT - assumed 'CURLOP_TIMEOUT' E:\xampp\htdocs\shop\ThinkPHP\Library\Util\Wx\Wxpaysdk.class.php 第 234 行.
+NOTIC: [2] curl_setopt() expects parameter 2 to be long, string given E:\xampp\htdocs\shop\ThinkPHP\Library\Util\Wx\Wxpaysdk.class.php 第 234 行.
+NOTIC: [2] curl_close(): 33 is not a valid cURL handle resource E:\xampp\htdocs\shop\ThinkPHP\Library\Util\Wx\Wxpaysdk.class.php 第 253 行.
+NOTIC: [8] Undefined index: prepay_id E:\xampp\htdocs\shop\ThinkPHP\Library\Util\Wx\Wxpaysdk.class.php 第 61 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+

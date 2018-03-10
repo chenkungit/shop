@@ -188,6 +188,27 @@ class VipController extends BaseController
         }
         $this->ajaxReturn($info);
     }
+    //分享到朋友圈得8个金果
+    public function share()
+    {
+        if(IS_POST)
+        {
+            $m = M('vip');
+            $vipid = self::$WAP['vipid'];
+            $vip = $m->where('id='.$vipid)->find();
+            $vip['score'] =  $vip['score'] + 8;
+            $ret = $m->save($vip);
+            if($ret)
+            {
+                $info['status'] = 1;
+                $info['msg'] = "分享成功，获得8个金果！";
+            }else{
+                $info['status'] = 0;
+                $info['msg'] = "金果获取失败，请稍后再试！";
+            }
+            $this->ajaxReturn($info);
+        }
+    }
 
     public function reg()
     {
@@ -488,14 +509,18 @@ class VipController extends BaseController
             if (!$post['txprice']) {
                 $this->error('提现' . $_SESSION['SHOP']['set']['yjname'] . '不能为空！');
             }
-            if ($post['txprice'] < self::$WAP['vipset']['tx_money']) {
-                $this->error('提现' . $_SESSION['SHOP']['set']['yjname'] . '不得少于' . self::$WAP['vipset']['tx_money'] . '个！');
+            if (!$post['kkprice']) {
+                $this->error('实际扣款不能为空！');
             }
 
-            if ($post['txprice'] > $vip['money']) {
+            if ($post['txprice'] < self::$WAP['vipset']['tx_money']) {
+                $this->error('提现' . $_SESSION['SHOP']['set']['yjname'] . '不得少于' . self::$WAP['vipset']['tx_money'] . '！');
+            }
+
+            if ($post['kkprice'] > $vip['money']) {
                 $this->error('您的' . $_SESSION['SHOP']['set']['yjname'] . '不足！');
             }
-            $vip['money'] = $vip['money'] - $post['txprice'];
+            $vip['money'] = $vip['money'] - $post['kkprice'];
             $rvip = $m->save($vip);
 
             if (FALSE !== $rvip) {

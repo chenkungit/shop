@@ -187,7 +187,18 @@ class WxhongbaoController extends BaseController
                 $ree = $wx->sendCustomMessage($msg);
                 // 发送消息完成============
 
-                $this->ajaxReturn($info);                
+                //提现成功，返还5%的现金券
+                $mcashq = M('Shop_cashq');
+                $cashQty = Round($old['txprice']*0.05,2);
+                //插入现金券记录表
+                $cashq['user_id'] = $old['vipid'];
+                $cashq['price'] = $cashQty;
+                $cashq['time'] = date('Y-m-d');
+                $mcashq->add($cashq);
+                //更改现金券总额
+                $vip['cashq'] = $vip['cashq'] +  $cashQty;
+                $mvip->save($vip);
+                $this->ajaxReturn($info);
 		    } else {
                 $info['status'] = 0;
                 $info['msg'] = '操作失败，请重新尝试！';

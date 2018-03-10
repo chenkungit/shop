@@ -150,6 +150,7 @@ class FxController extends BaseController
         }
         //dump($txtotal);
         $this->assign('data', $data);
+        $this->assign('xxlinks',count($sub));
         $this->display();
     }
 
@@ -255,8 +256,12 @@ class FxController extends BaseController
         $m = M('fx_syslog');
         $map['to'] = $_SESSION['WAP']['vipid'];
         $map['status'] = 1;
+        //查询总分享佣金
+        $yjtotal = $m->where($map)->sum('fxyj');
         $cache = $m->where($map)->limit(50)->order('ctime desc')->select();
         $this->assign('cache', $cache);
+        $this->assign('yjtotal',round($yjtotal,2));
+        $this->assign('yjcount',count($cache));
         $this->display();
     }
 

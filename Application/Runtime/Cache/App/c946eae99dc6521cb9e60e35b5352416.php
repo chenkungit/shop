@@ -54,6 +54,8 @@
 			<input type="hidden" name="isyf" value="<?php echo ($isyf); ?>">
 			<input type="hidden" name="bdgoodsid" value="">
 			<input type="hidden" name="bdgoodsprice" value="">
+			<input type="hidden" id = "ishavebd" name="ishavebd" value="<?php echo ($ishavebd); ?>">
+			<input type="hidden" id = "ishavepj" name="ishavepj" value="<?php echo ($ishavepj); ?>">
 		</div>
 		<!-- 商品明细  -->
 		<div class="ads-lst border-t1 border-b1 ovflw mr-b back2">
@@ -73,6 +75,10 @@
 					</div>
 				</div><?php endforeach; endif; ?>
 			<p class="border-b1 ads_ortt3 fonts18 color3">&nbsp;使用代金卷<span class="fr"><select name="djqid" id="djqid" class="ads-sel"><option value="0" data-money="0">请选择有效代金卷</option><?php if(is_array($djq)): foreach($djq as $key=>$vo): ?><option value="<?php echo ($vo["id"]); ?>" data-money="<?php echo ($vo["money"]); ?>"><?php echo ($vo["money"]); ?>元代金卷</option><?php endforeach; endif; ?></select></span></p>
+			<?php if(($vipInfo["cashq"]) > "0"): ?><p class="border-b1 ads_ortt3 fonts85">&nbsp;现金券共<em class="fonts18 color3"><b><?php echo ($vipInfo["cashq"]); ?></b></em>元,本次使用 <input style="width: 50px;color: red;font-size: 18px;text-align: center"  type="text" name="cashq" id="cashq" value="0"> 元</p><?php endif; ?>
+			<?php if(($ishavepj) == "1"): if(($ishavebd) == "0"): if(($vipInfo["gwqmoney"]) > "0"): ?><p class="border-b1 ads_ortt3 fonts85">&nbsp;购物券共<em class="fonts18 color3"><b><?php echo ($vipInfo["gwqmoney"]); ?></b></em>元,最大可用<em class="fonts18 color3"><b><?php echo ($maxgwq); ?></b></em>元,本次使用 <input style="width: 50px;color: red;font-size: 18px;text-align: center"  type="text" name="gwq" id="gwq" value="0"> 元</p><?php endif; endif; endif; ?>
+			<?php if(($ishavepj) == "0"): if(($ishavebd) == "1"): if(($vipInfo["isfx"]) == "1"): else: ?><p class="border-b1 ads_ortt3 fonts18">&nbsp;金果数量：<em class="fonts18 color3"><b class="totalapple"><?php echo ($vipInfo["score"]); ?></b></em><span class="fr"><select name="jgid" id="jgid" class="ads-sel"><option value="0" data-money="0">选择金果数量</option><?php if(($vipInfo["score"]) >= "87"): ?><option value="87" data-money="87">87个金果</option><?php endif; ?></select></span> </p><?php endif; endif; endif; ?>
+			<?php if(($ishavepj) == "0"): if(($ishavebd) == "1"): if(($vipInfo["levelprice"]) > "0"): if(($vipInfo["levelprice"]) < $maxprice): ?><p class="border-b1 ads_ortt3 fonts18">&nbsp;此商品可升级会员级别,免支付<em class="fonts18 color3"><b class="mf">￥<?php echo ($vipInfo["levelprice"]); ?></b><input type="hidden" id="mf" name="mf" value="<?php echo ($vipInfo["levelprice"]); ?>"/></em></p><?php endif; endif; endif; endif; ?>
 			<p class="border-b1 ads_ortt3 fonts85">&nbsp;邮费政策：<?php if(($isyf) == "1"): ?>全场定邮<?php echo ($yf); ?>元，订单满<?php echo ($yftop); ?>元包邮。<?php else: ?>全场包邮<?php endif; ?></p>
 			<p class="border-b1 ads_ortt3 fonts85 ads"><input type="text" name="msg" class="ads_orinput" placeholder="给卖家留言"/></p>
 			<p class=" ads_ortt3 fonts85 ovflw"><span class="fr ">共<?php echo ($totalnum); ?>件商品&nbsp;&nbsp;&nbsp;&nbsp;商品：<em class="fonts18 color3">￥<b class="totalprice"><?php echo ($totalprice); ?></b></em>&nbsp;&nbsp;&nbsp;&nbsp;邮费：<em class="fonts18 color3">￥<b><?php echo ($yf); ?></b></em></span></p>
@@ -88,7 +94,8 @@
 						</div>
 						<p class="ads_pay_p1 ads_pay_lineh1">余额：<i id='money' data-money='<?php echo ($_SESSION['WAP']['vip']['money']); ?>'>￥<?php echo ($_SESSION['WAP']['vip']['money']); ?></i></p>
 						<p class="ads_pay_p2 ads_pay_lineh1 color10 ads_font_size2">余额不足由其他方式支付</p>
-					</div>					
+					</div>
+					<!--
 					<div class="ads_pay ovflw" data-paytype = "alipayApp" data-disable="0">
 						<span class="iconfont fl ads_pay_lineh dtl_mar1">&#xe656</span>
 						<div class="ads_orimg fl dtl_mar1">
@@ -96,6 +103,7 @@
 						</div>
 						<p class="ads_pay_lineh">手机支付宝支付</p>
 					</div>
+					-->
 					<div class="ads_pay ovflw" data-paytype = "wxpay" data-disable="0">
 						<span class="iconfont fl ads_pay_lineh dtl_mar1">&#xe656</span>
 						<div class="ads_orimg fl dtl_mar1">
@@ -123,6 +131,23 @@
 				<span class="fr ads-sum"><em class="fonts9">商品:</em><em class="fonts1">￥<b class="totalprice"><?php echo ($totalprice); ?></b></em>&nbsp;&nbsp;&nbsp;&nbsp;邮费:<em class="fonts18 color3">￥<b><?php echo ($yf); ?></b></em></span>
 		</div>
 		<script type="text/javascript">
+			//如果是升级会员级别则减免对应金额
+            var nowtotal = "<?php echo ($totalprice); ?>";
+            var currentmoney ="<?php echo ($totalprice); ?>";
+            var mf = 0;
+            var gwq = 0;
+            var cashq = 0;
+            var apple = 0;
+            var djq = 0;
+			$(function () {
+                if($('#mf').val()!=undefined)
+				{
+                    var newmoney = Number(nowtotal)-Number($('#mf').val()) - mf - gwq - cashq - apple - djq;
+                    mf = Number($('#mf').val());
+                    $(totalprice).html(newmoney);
+				}
+            })
+
 			var sid="<?php echo ($sid); ?>";
 			var lasturlencode="<?php echo ($lasturlencode); ?>";
 			var paytype=$('#paytype');
@@ -141,6 +166,85 @@
 					App_gmuMsg('请使用其它方式！');
 				}
 			});
+            $('#cashq').on('change',function () {
+                var maxcashq = "<?php echo ($vipInfo["cashq"]); ?>";
+
+                if(Number($('#cashq').val()) > maxcashq || Number($('#cashq').val()) < 0)
+                {
+                    App_gmuMsg('现金券本次最大可使用'+maxcashq+'元！');
+                    $('#cashq').val(0);
+                    var newmoney=Number(nowtotal)-Number($('#cashq').val())- mf - gwq - apple - djq;
+                    $(totalprice).html(newmoney);
+                    return false;
+                }else
+                {
+                    //现金券特效
+                    var newmoney=Number(nowtotal)-Number($('#cashq').val()) - mf - gwq - apple - djq;
+                    cashq = Number($('#cashq').val());
+                    // 初始支付限制
+                    $('.ads_pay').data('disable',0);
+                    $('.ads_pay span').css('color',' #cfcfcf');
+                    // 判断当前的是否小于0，小于0设置为0
+                    if(newmoney<=0){
+                        newmoney=0;
+                        $('.ads_pay').each(function(){
+                            // 允许只允许使用余额支付
+                            if($(this).data('paytype')=='wxpay'){
+                                $(this).data('disable',1);
+                            }
+                        });
+                    }
+                    // 判断可否使用余额支付
+                    var money = Number($('#money').data('money'));
+                    if(newmoney>money){
+                        $('.ads_pay').each(function(){
+                            if($(this).data('paytype')=='money'){
+                                $(this).data('disable',1);
+                            }
+                        });
+                    }
+                    $(totalprice).html(newmoney);
+                }
+            });
+			$('#gwq').on('change',function () {
+			    var maxgwq = "<?php echo ($maxgwq); ?>";
+				if(Number($('#gwq').val()) > maxgwq || Number($('#gwq').val()) < 0)
+				{
+                    App_gmuMsg('购物券本次最大可使用'+maxgwq+'元！');
+                    $('#gwq').val(0);
+                    var newmoney=Number(nowtotal)-Number($('#gwq').val())- mf - cashq - apple - djq;
+                    $(totalprice).html(newmoney);
+                    return false;
+				}else
+				{
+					//购物券特效
+                    var newmoney=Number(nowtotal)-Number($('#gwq').val()) - mf - cashq - apple - djq;
+                    gwq = Number($('#gwq').val());
+                    // 初始支付限制
+                    $('.ads_pay').data('disable',0);
+                    $('.ads_pay span').css('color',' #cfcfcf');
+                    // 判断当前的是否小于0，小于0设置为0
+                    if(newmoney<=0){
+                        newmoney=0;
+                        $('.ads_pay').each(function(){
+                            // 允许只允许使用余额支付
+                            if($(this).data('paytype')=='wxpay'){
+                                $(this).data('disable',1);
+                            }
+                        });
+                    }
+                    // 判断可否使用余额支付
+                    var money = Number($('#money').data('money'));
+                    if(newmoney>money){
+                        $('.ads_pay').each(function(){
+                            if($(this).data('paytype')=='money'){
+                                $(this).data('disable',1);
+                            }
+                        });
+                    }
+                    $(totalprice).html(newmoney);
+                }
+            });
 			$('#orderconfirm').on('click',function(){
 				if(!$('#ordervip').val()){
 					App_gmuMsg('请选择收货地址！');
@@ -150,6 +254,11 @@
 					App_gmuMsg('请选择支付方式！');
 					return false;
 				}
+                if($('#ishavebd').val()==1 && $('#ishavepj').val() ==1){
+                    App_gmuMsg('不能同时购买两个专区的商品！');
+                    return false;
+                }
+
 				var okfun=function(){$('#orderform').submit();}
 				//alert($('#djqid').val());
 				if($('#djqid').val()==0){
@@ -163,10 +272,11 @@
 			});
 			//代金卷特效
 			var totalprice=$('.totalprice');
-			var nowtotal="<?php echo ($totalprice); ?>";
 			var djqops=document.getElementById("djqid");
 			djqops.addEventListener('change',function(){
-				var newmoney=Number(nowtotal)-Number(djqops.options[djqops.selectedIndex].getAttribute('data-money'));
+				var newmoney=Number(nowtotal)-Number(djqops.options[djqops.selectedIndex].getAttribute('data-money')) - gwq - cashq - apple - mf;
+				//代金券
+				djq = Number(djqops.options[djqops.selectedIndex].getAttribute('data-money'));
 				// 初始支付限制
 				$('.ads_pay').data('disable',0);
 				$('.ads_pay span').css('color',' #cfcfcf');
@@ -191,9 +301,42 @@
 				}
 				$(totalprice).html(newmoney);
 			});
+
+            //金果特效
+            var totalprice=$('.totalprice');
+            var jgops=document.getElementById("jgid");
+            jgops.addEventListener('change',function(){
+                var newmoney=Number(nowtotal)-Number(jgops.options[jgops.selectedIndex].getAttribute('data-money')) - gwq - cashq - djq - mf;
+                apple = Number(jgops.options[jgops.selectedIndex].getAttribute('data-money'));
+                // 初始支付限制
+                $('.ads_pay').data('disable',0);
+                $('.ads_pay span').css('color',' #cfcfcf');
+                // 判断当前的是否小于0，小于0设置为0
+                if(newmoney<=0){
+                    newmoney=0;
+                    $('.ads_pay').each(function(){
+                        // 允许只允许使用余额支付
+                        if($(this).data('paytype')=='wxpay'){
+                            $(this).data('disable',1);
+                        }
+                    });
+                }
+                // 判断可否使用余额支付
+                var money = Number($('#money').data('money'));
+                if(newmoney>money){
+                    $('.ads_pay').each(function(){
+                        if($(this).data('paytype')=='money'){
+                            $(this).data('disable',1);
+                        }
+                    });
+                }
+                $(totalprice).html(newmoney);
+
+            });
+
 		</script>
 		<!--通用分享-->
-		<!-- <script type="text/javascript">
+		 <script type="text/javascript">
 	function onBridgeReady(){
  		WeixinJSBridge.call('hideOptionMenu');
 	}
@@ -209,6 +352,6 @@
 	    onBridgeReady();
 	}	
 </script>
- -->
+
 	</body>
 </html>
