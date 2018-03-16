@@ -55,9 +55,13 @@
                 <eq name="isqiandao" value="1">
                     <div class="fl home-item"><a href="javascript:void(0)" class="home-br text-c"><span id="home-jy">{$data.gwqmoney}</span><span class="home-add" id="add-jy"></span><p>我的购物券</p></a></div>
                     <else/>
+                    <div class="fl home-item"><a href="javascript:void(0)" class="home-br text-c"><span id="home-jy">{$data.gwqmoney}</span><span class="home-add" id="add-jy"></span><p>我的购物券</p></a></div>
+                    <!--
                     <div class="fl home-item"><a href="javascript:void(0)" class="home-br text-c"><span>{$data.total_xxlink}</span><p>我的团队</p></a></div>
+                    -->
                 </eq>
-                <div class="fl home-item"><a href="{:U('App/Vip/card')}" class="text-c"><span>{$data.cashq}</span><p>我的现金券</p></a></div>
+                <!-- {:U('App/Vip/card')}-->
+                <div class="fl home-item"><a href="#" class="text-c"><span>{$data.cashq}</span><p>我的现金券</p></a></div>
             </div>
         </div>
     </div>
