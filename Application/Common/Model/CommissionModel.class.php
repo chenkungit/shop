@@ -74,7 +74,7 @@ class CommissionModel
         }
     }
     //计算订单取购物券金额
-    public function orderGwq($items = array(),$vipid)
+    public function orderGwq($items = array(),$vipid,$orderid)
     {
         if (count($items) > 0)
         {
@@ -83,6 +83,7 @@ class CommissionModel
                 $goods = M('Shop_goods')->where('id='.$vv['goodsid'])->find();
                 $mgwq = M('Shop_gwq');
                 $mvip = M('vip');
+                $fxtmp = array();//缓存数组
                 $vip = $mvip->where('id='.$vipid)->find();
                 //报单商品
                 if ($goods['isbd']==1)
@@ -112,7 +113,7 @@ class CommissionModel
                 else//平价商城(返还50%购物券)
                 {
 
-                    $fgwq = round($goods['price']*0.5,2);
+                    $fgwq = round($goods['oprice']*0.5,2);
                     //插入购物券日志
                     $gwq['user_id'] = $vipid;
                     $gwq['good_id'] = $goods['id'];
@@ -123,6 +124,81 @@ class CommissionModel
                     $vip['gwqmoney'] =  $vip['gwqmoney']  +  $fgwq;
                     $mvip->save($vip);
                     $mgwq->add($gwq);
+
+                    //平价商城分红10%（一级4%,其他级别平分6%）
+                    $pid = $vip['pid'];
+                    $mfxlog = M('fx_syslog');
+                    if($pid)
+                    {
+                        $fx1 = $mvip->where('id=' . $pid)->find();
+                        $fx1['money'] = $fx1['money'] +  round($goods['oprice']*0.04,2);
+                        $fx1['total_xxbuy'] = $fx1['total_xxbuy'] + 1;//下线中购买产品总次数
+                        $fx1['total_xxyj'] = $fx1['total_xxyj'] + round($goods['oprice']*0.04,2);//下线贡献佣金
+                        $rfx = $mvip->save($fx1);
+                        if (FALSE !== $rfx) {
+                            //佣金发放成功
+                            $fxlog['status'] = 1;
+                        } else {
+                            //佣金发放失败
+                            $fxlog['status'] = 0;
+                        }
+                        $fxlog['fhlb'] = "市场奖励";
+                        $fxlog['oid'] = $orderid;
+                        $fxlog['from'] = $vipid;
+                        $fxlog['fromname'] = $vip['nickname'];
+                        $fxlog['to'] = $pid;
+                        $fxlog['toname'] =$fx1['nickname'];
+                        $fxlog['fxprice'] = $goods['oprice'];
+                        $fxlog['fxyj'] = round($goods['oprice']*0.04,2);
+                        $fxlog['ctime'] = time();
+                        array_push($fxtmp, $fxlog);
+
+                        //二级以上则平分6%
+                        $path = $vip['path'];
+                        if($path)
+                        {
+                            $arry = explode('-',$path);
+                            if (count($arry) > 2)
+                            {
+                                //平分6%
+                                $yj = round($goods['oprice']*0.06,2)/(count($arry)-2);
+                                foreach ($arry as $v)
+                                {
+                                    if ($v != '0' && $v != $pid)
+                                    {
+                                        $fxx = $mvip->where('id=' . $v)->find();
+                                        $fxx['money'] = $fxx['money'] +  $yj;
+                                        $fxx['total_xxbuy'] = $fxx['total_xxbuy'] + 1;//下线中购买产品总次数
+                                        $fxx['total_xxyj'] = $fxx['total_xxyj'] + $yj;//下线贡献佣金
+                                        $rfx = $mvip->save($fxx);
+                                        if (FALSE !== $rfx) {
+                                            //佣金发放成功
+                                            $fxlog2['status'] = 1;
+                                        } else {
+                                            //佣金发放失败
+                                            $fxlog2['status'] = 0;
+                                        }
+                                        $fxlog2['fhlb'] = "市场奖励";
+                                        $fxlog2['oid'] = $orderid;
+                                        $fxlog2['from'] = $vipid;
+                                        $fxlog2['fromname'] = $vip['nickname'];
+                                        $fxlog2['to'] = $v;
+                                        $fxlog2['toname'] =$fxx['nickname'];
+                                        $fxlog2['fxprice'] = $goods['oprice'];
+                                        $fxlog2['fxyj'] = $yj;
+                                        $fxlog2['ctime'] = time();
+                                        array_push($fxtmp, $fxlog2);
+                                    }
+                                }
+                            }
+                        }
+                        if (count($fxtmp) >= 1) {
+                            $refxlog = $mfxlog->addAll($fxtmp);
+                            if (!$refxlog) {
+                                file_put_contents('./Data/app_fx_error.txt', '错误日志时间:' . date('Y-m-d H:i:s') . PHP_EOL . '错误纪录信息:' . $rfxlog . PHP_EOL . PHP_EOL . $mfxlog->getLastSql() . PHP_EOL . PHP_EOL, FILE_APPEND);
+                            }
+                        }
+                    }
                 }
             }
         }

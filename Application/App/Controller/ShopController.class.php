@@ -91,6 +91,7 @@ class ShopController extends BaseController
             // 获取下级
             if ($indexicons[$k]['soncate']) {
                 $son = M('Shop_cate')->where(array('id' => array('in', in_parse_str($indexicons[$k]['soncate']))))->select();
+
                 foreach ($son as $kk => $vv) {
                     $temp = $this->getPic($vv['icon']);
                     $son[$kk]['iconurl'] = $temp['imgurl'];
@@ -1542,7 +1543,7 @@ class ShopController extends BaseController
                 }
             }
             //购物券发放
-            $commission->orderGwq(unserialize($cache['items']),$cache['vipid']);
+            $commission->orderGwq(unserialize($cache['items']),$cache['vipid'],$cache['id']);
 
             $mlog = M('Shop_order_log');
             $dlog['oid'] = $cache['id'];
