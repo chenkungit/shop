@@ -194,19 +194,32 @@ class VipController extends BaseController
         if(IS_POST)
         {
             $m = M('vip');
+            $apple = M('vip_apple');
             $vipid = self::$WAP['vipid'];
-            $vip = $m->where('id='.$vipid)->find();
-            $vip['score'] =  $vip['score'] + 8;
-            $ret = $m->save($vip);
-            if($ret)
+
+            //查询今天金果获得数量
+            $todayApple = $apple->where('user_id='.$vipid.' and time='+date('Y-m-d'))->find();
+            if(!$todayApple)
             {
-                $info['status'] = 1;
-                $info['msg'] = "分享成功，获得8个金果！";
-            }else{
-                $info['status'] = 0;
-                $info['msg'] = "金果获取失败，请稍后再试！";
+                $vip = $m->where('id='.$vipid)->find();
+                $vip['score'] =  $vip['score'] + 8;
+                $ret = $m->save($vip);
+                if($ret)
+                {
+                    $info['status'] = 1;
+                    $info['msg'] = "分享成功，获得8个金果！";
+                    //添加金果获取日志
+                    $myapple['user_id'] = $vipid;
+                    $myapple['score'] = 8;
+                    $myapple['time'] = date('Y-m-d');
+                    $myapple['ly'] = '分享金果';
+                    $apple->add($myapple);
+                }else{
+                    $info['status'] = 0;
+                    $info['msg'] = "金果获取失败，请稍后再试！";
+                }
+                $this->ajaxReturn($info);
             }
-            $this->ajaxReturn($info);
         }
     }
 

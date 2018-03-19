@@ -338,7 +338,25 @@
                 //alert('用户点击发送给朋友');
             },
             success: function(res) {
+                //alert('已分享5555');
 
+            },
+            cancel: function(res) {
+                //alert('已取消');
+            },
+            fail: function(res) {
+                //alert(JSON.stringify(res));
+            }
+        });
+        //分享到朋友圈
+        wx.onMenuShareTimeline({
+            title: share_title,
+            link: share_url,
+            imgUrl: share_img,
+            trigger: function(res) {
+                //alert('用户点击分享到朋友圈');
+            },
+            success: function(res) {
                 var tourl="{:U('App/Vip/share')}";
                 $.ajax({
                     type:"post",
@@ -370,27 +388,6 @@
                         }
                     }
                 });
-                //alert('已分享5555');
-            },
-            cancel: function(res) {
-                //alert('已取消');
-            },
-            fail: function(res) {
-                //alert(JSON.stringify(res));
-            }
-        });
-        //分享到朋友圈
-        wx.onMenuShareTimeline({
-            title: share_title,
-            link: share_url,
-            imgUrl: share_img,
-            trigger: function(res) {
-                //alert('用户点击分享到朋友圈');
-            },
-            success: function(res) {
-                //alert('已分享1');
-
-
             },
             cancel: function(res) {
                 alert('已取消');
