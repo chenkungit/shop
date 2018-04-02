@@ -225,6 +225,8 @@ class Wechat
     public $errCode = 40001;
     public $errMsg = "no access";
     public $logcallback;
+    //缓存access_token
+    private $token_cache;
 
     public function __construct($options)
     {
@@ -1172,7 +1174,8 @@ class Wechat
      */
     protected function setCache($cachename, $value, $expired)
     {
-        //TODO: set cache implementation
+        S($cachename,null);
+        S($cachename,$value,$expired);
         return false;
     }
 
@@ -1183,8 +1186,13 @@ class Wechat
      */
     protected function getCache($cachename)
     {
+        $cache = S($cachename);
+        if (!$cache)
+        {
+            return false;
+        }
         //TODO: get cache implementation
-        return false;
+        return $cache;
     }
 
     /**
