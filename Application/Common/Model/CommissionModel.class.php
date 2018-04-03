@@ -96,7 +96,7 @@ class CommissionModel
                     $condition['time'] = date('Y-m-d');
                     $condition['ly'] = 1;
                     $score = $mgwq->where($condition)->sum('score');
-                    if($score + $gwqmoney <= $maxgwqmoney)
+                    if(($score + $gwqmoney <= $maxgwqmoney) || $maxgwqmoney == 0)
                     {
                         //插入购物券日志
                         $gwq['user_id'] = $vipid;
