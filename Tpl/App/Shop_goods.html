@@ -304,8 +304,8 @@
 	var share_url = "http://{$_SERVER['HTTP_HOST']}__ROOT__/App/Shop/goods/ppid/{$_SESSION['WAP']['vipid']}/id/{$cache.id}";
 	var share_title="{$cache.name}";
 	var share_content="{$cache.summary}";
+
 	var share_img="{$_SESSION['WAP']['shopset']['url']}{$apppic.imgurl}";
-	
   wx.config({
       debug: false,
       appId: "{$jsapi['appId']}",
@@ -316,12 +316,12 @@
         'checkJsApi',
         'onMenuShareTimeline',
         'onMenuShareAppMessage',
-        'onMenuShareQQ',
-        'onMenuShareWeibo',
-        'hideMenuItems',
-        'showMenuItems',
-        'hideAllNonBaseMenuItem',
-        'showAllNonBaseMenuItem',
+        // 'onMenuShareQQ',
+        // 'onMenuShareWeibo',
+        // 'hideMenuItems',
+        // 'showMenuItems',
+        // 'hideAllNonBaseMenuItem',
+        // 'showAllNonBaseMenuItem',
 //      'translateVoice',
 //      'startRecord',
 //      'stopRecord',
@@ -383,7 +383,37 @@
 	        //alert('用户点击分享到朋友圈');
 	      },
 	      success: function (res) {
-	        //alert('已分享');
+	        var tourl="{:U('App/Vip/share')}";
+                $.ajax({
+                    type:"post",
+                    url:tourl,
+                    dataType:'json',
+                    success:function(info){
+                        if(info['status']==3){
+                            var fun=function(){
+                                window.location.href=basketloginurl;
+                            }
+                            App_gmuMsg(info['msg'],fun);
+                            return false;
+                        }else if(info['status']==2){
+                            var fun=function(){
+                                window.location.href=basketurl;
+                            }
+                            App_gmuMsg(info['msg'],fun);
+                            return false;
+                        }else if(info['status']==1){
+//                            var fun=function(){
+//                                window.location.href="{:U('App/Shop/index')}";
+//                            }
+                            //alert("ss");
+                            App_gmuMsg(info['msg']);
+                            return false;
+                        }else{
+                            App_gmuMsg(info['msg']);
+                            return false;
+                        }
+                    }
+                });
 	      },
 	      cancel: function (res) {
 	        //alert('已取消');
