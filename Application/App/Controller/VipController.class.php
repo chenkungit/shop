@@ -196,9 +196,10 @@ class VipController extends BaseController
             $m = M('vip');
             $apple = M('vip_apple');
             $vipid = self::$WAP['vipid'];
-
+            $condition['user_id'] = $vipid;
+            $condition['time'] = date('Y-m-d');
             //查询今天金果获得数量
-            $todayApple = $apple->where('user_id='.$vipid.' and time='+date('Y-m-d'))->find();
+            $todayApple = $apple->where($condition)->find();
             if(!$todayApple)
             {
                 $vip = $m->where('id='.$vipid)->find();
@@ -220,6 +221,9 @@ class VipController extends BaseController
                 }
                 $this->ajaxReturn($info);
             }
+            $info['status'] = 0;
+            $info['msg'] = "分享成功";
+            $this->ajaxReturn($info);
         }
     }
 
@@ -658,6 +662,7 @@ class VipController extends BaseController
         $m = M('xq');
         if (IS_POST) {
             $post = I('post.');
+            $vipid = self::$WAP['vipid'];
             $post['vipid'] = $vipid;
             $post['xqgroupid'] = M('xq')->where('id=' . $post['xqid'])->getField('groupid');
             $r = $post['id'] ? $m->save($post) : $m->add($post);
