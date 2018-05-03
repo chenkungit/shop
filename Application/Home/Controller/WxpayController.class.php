@@ -90,6 +90,7 @@ class WxpayController extends Controller
         $options['mchkey'] = self::$SET['wxmchkey'];
         $paysdk = new \Util\Wx\Wxpaysdk($options);
 
+        dump($paysdk);
         $paysdk->setParameter("openid", $openid); //会员openid
         $paysdk->setParameter("body", "支付商品订单"); //商品描述
         //自定义订单号，此处仅作举例
