@@ -708,6 +708,7 @@ class ShopController extends BaseController
                     $this->error('通讯失败！请重新尝试支付！');
                 }
                 $vip['isapple'] = 1;
+                $vip['appleFlag'] = 1;
                 $vip['score'] = $vip['score'] - $data['jgid'];
                 $rjg = $mvip->save($vip);
                 if (FALSE === $rjg) {
@@ -838,6 +839,8 @@ class ShopController extends BaseController
             $ishavepj = 0;
             //商品最大单价
             $maxprice = 0;
+            //购物券最大使用金额
+            $maxgwq = 0;
             foreach ($cache as $k => $v) {
                 //sku模型
                 $goods = $mgoods->where('id=' . $v['goodsid'])->find();
@@ -903,6 +906,7 @@ class ShopController extends BaseController
                             $cache[$k]['pic'] = $pic['imgurl'];
                             $totalnum = $totalnum + $cache[$k]['num'];
                             $totalprice = $totalprice + $cache[$k]['price'] * $cache[$k]['num'];
+                            $maxgwq = $maxgwq + round($goods['price']*$goods['gwqbl'],0);
                         } else {
                             //无库存删除
                             $todelids = $todelids . $v['id'] . ',';
@@ -939,10 +943,10 @@ class ShopController extends BaseController
             $this->assign('ishavebd',$ishavebd);
             $this->assign('ishavepj',$ishavepj);
             $this->assign('maxprice',$maxprice);
-            $maxgwq = round($totalprice*0.3,0);
+            //$maxgwq = round($totalprice*0.3,0);
             if($vipInfo['gwqmoney'] >= $maxgwq)
             {
-                $this->assign('maxgwq', round($totalprice*0.3,0));
+                $this->assign('maxgwq', $maxgwq);
             }else
             {
                 $this->assign('maxgwq', round($vipInfo['gwqmoney'],0));
@@ -1029,7 +1033,6 @@ class ShopController extends BaseController
                 $map['status'] = 1;
                 break;
         }
-        echo($map);
         $cache = $m->where($map)->order('ctime desc')->select();
         if ($cache) {
             foreach ($cache as $k => $v) {
@@ -1189,6 +1192,12 @@ class ShopController extends BaseController
                         $data_vip['levelid'] = $level['levelid'];
                     }
                 }
+            }else{//平价会员
+                //第一次成为平价会员
+                if($data_vip['ispj'] != 1)
+                {
+                    $data_vip['ispj'] = 1;
+                }
             }
             $re = M('vip')->save($data_vip);
             if (FALSE === $re) {
@@ -1216,9 +1225,8 @@ class ShopController extends BaseController
                 //第一层分销
                 $fx1 = $mvip->where('id=' . $pid)->find();
                 //如果上级与本级均是金果成为会员，则不享受分享红利
-                if($fx1['isapple']!=1 || $myvip['isapple']!=1) {
+                if($myvip['isapple']!=1) {
                     //赠送购物券逻辑
-
                     if ($fx1['isfx']) {
                         //$fxlog['fxyj'] = $commission->ordersCommission('fx1rate', $orderids);
                         $fxlog['fxyj'] = $commission->ordersCommissionNew($fx1, 'yj', $orderids);
@@ -1247,55 +1255,55 @@ class ShopController extends BaseController
 
                         //价值盟友模块
                         //1.获得上级分享红利的10% 多人平均分配
-                        $subvips = $mvip->where('pid=' . $fx1['id'])->select();
-                        $counts = $mvip->where('pid=' . $fx1['id'])->count();
+                        $subvips = $mvip->where('pid=' . $fx1['id'] . ' and isfx = 1')->select();
+                        $counts = $mvip->where('pid=' . $fx1['id'] . ' and isfx = 1')->count();
                         if ($counts > 0) {
                             foreach ($subvips as $kk => $vv) {
-                                $jzmylog['oid'] = $orderid;
-                                $jzmylog['fxprice'] = round($fxlog['fxyj'] * 0.1, 2);
-                                $jzmylog['ctime'] = time();
-                                $jzmylog['fxyj'] = round($fxlog['fxyj'] * 0.1 / $counts, 2);
-                                $jzmylog['fhlb'] = "价值盟友";
-                                $jzmylog['from'] = $fx1['id'];
-                                $jzmylog['fromname'] = $fx1['nickname'];
-                                $jzmylog['to'] = $vv['id'];
-                                $jzmylog['toname'] = $vv['nickname'];
-                                $vv['money'] = $vv['money'] + $jzmylog['fxyj'];
-                                $rfx = $mvip->save($vv);
-                                if (FALSE !== $rfx) {
-                                    //佣金发放成功
-                                    $jzmylog['status'] = 1;
-                                } else {
-                                    //佣金发放失败
-                                    $jzmylog['status'] = 0;
-                                }
-                                array_push($fxtmp, $jzmylog);
+                                    $jzmylog['oid'] = $orderid;
+                                    $jzmylog['fxprice'] = round($fxlog['fxyj'] * 0.1, 2);
+                                    $jzmylog['ctime'] = time();
+                                    $jzmylog['fxyj'] = round($fxlog['fxyj'] * 0.1 / $counts, 2);
+                                    $jzmylog['fhlb'] = "价值盟友";
+                                    $jzmylog['from'] = $fx1['id'];
+                                    $jzmylog['fromname'] = $fx1['nickname'];
+                                    $jzmylog['to'] = $vv['id'];
+                                    $jzmylog['toname'] = $vv['nickname'];
+                                    $vv['money'] = $vv['money'] + $jzmylog['fxyj'];
+                                    $rfx = $mvip->save($vv);
+                                    if (FALSE !== $rfx) {
+                                        //佣金发放成功
+                                        $jzmylog['status'] = 1;
+                                    } else {
+                                        //佣金发放失败
+                                        $jzmylog['status'] = 0;
+                                    }
+                                    array_push($fxtmp, $jzmylog);
                             }
                         }
                         //2.获得同一级左右分享的5%
                         if ($fx1['pid'] > 0) {
-                            $zyvips = $mvip->where('pid=' . $fx1['pid'] . ' and id <> ' . $fx1['id'])->select();
-                            $zycounts = $mvip->where('pid=' . $fx1['pid'] . ' and id <> ' . $fx1['id'])->count();
+                            $zyvips = $mvip->where('pid=' . $fx1['pid'] . ' and id <> ' . $fx1['id'] . ' and isfx =1')->select();
+                            $zycounts = $mvip->where('pid=' . $fx1['pid'] . ' and id <> ' . $fx1['id'] . ' and isfx =1')->count();
                             foreach ($zyvips as $kk => $vv) {
-                                $zylog['oid'] = $orderid;
-                                $zylog['fxprice'] = round($fxlog['fxyj'] * 0.05, 2);
-                                $zylog['ctime'] = time();
-                                $zylog['fxyj'] = round($fxlog['fxyj'] * 0.05 / $zycounts, 2);
-                                $zylog['fhlb'] = "价值盟友";
-                                $zylog['from'] = $fx1['id'];
-                                $zylog['fromname'] = $fx1['nickname'];
-                                $zylog['to'] = $vv['id'];
-                                $zylog['toname'] = $vv['nickname'];
-                                $vv['money'] = $vv['money'] + $zylog['fxyj'];
-                                $rfx = $mvip->save($vv);
-                                if (FALSE !== $rfx) {
-                                    //佣金发放成功
-                                    $zylog['status'] = 1;
-                                } else {
-                                    //佣金发放失败
-                                    $zylog['status'] = 0;
-                                }
-                                array_push($fxtmp, $zylog);
+                                    $zylog['oid'] = $orderid;
+                                    $zylog['fxprice'] = round($fxlog['fxyj'] * 0.05, 2);
+                                    $zylog['ctime'] = time();
+                                    $zylog['fxyj'] = round($fxlog['fxyj'] * 0.05 / $zycounts, 2);
+                                    $zylog['fhlb'] = "价值盟友";
+                                    $zylog['from'] = $fx1['id'];
+                                    $zylog['fromname'] = $fx1['nickname'];
+                                    $zylog['to'] = $vv['id'];
+                                    $zylog['toname'] = $vv['nickname'];
+                                    $vv['money'] = $vv['money'] + $zylog['fxyj'];
+                                    $rfx = $mvip->save($vv);
+                                    if (FALSE !== $rfx) {
+                                        //佣金发放成功
+                                        $zylog['status'] = 1;
+                                    } else {
+                                        //佣金发放失败
+                                        $zylog['status'] = 0;
+                                    }
+                                    array_push($fxtmp, $zylog);
                             }
                         }
                     }
@@ -1329,55 +1337,59 @@ class ShopController extends BaseController
 
                             //价值盟友模块
                             //1.获得上级分享红利的10% 多人平均分配
-                            $subvips = $mvip->where('pid=' . $fx2['id'])->select();
-                            $counts = $mvip->where('pid=' . $fx2['id'])->count();
+                            $subvips = $mvip->where('pid=' . $fx2['id'] . ' and isfx =1')->select();
+                            $counts = $mvip->where('pid=' . $fx2['id'] . ' and isfx =1')->count();
                             if ($counts > 0) {
                                 foreach ($subvips as $kk => $vv) {
-                                    $jzmylog['oid'] = $orderid;
-                                    $jzmylog['fxprice'] = round($fxlog['fxyj'] * 0.1, 2);
-                                    $jzmylog['ctime'] = time();
-                                    $jzmylog['fxyj'] = round($fxlog['fxyj'] * 0.1 / $counts, 2);
-                                    $jzmylog['fhlb'] = "价值盟友";
-                                    $jzmylog['from'] = $fx2['id'];
-                                    $jzmylog['fromname'] = $fx2['nickname'];
-                                    $jzmylog['to'] = $vv['id'];
-                                    $jzmylog['toname'] = $vv['nickname'];
-                                    $vv['money'] = $vv['money'] + $jzmylog['fxyj'];
-                                    $rfx = $mvip->save($vv);
-                                    if (FALSE !== $rfx) {
-                                        //佣金发放成功
-                                        $jzmylog['status'] = 1;
-                                    } else {
-                                        //佣金发放失败
-                                        $jzmylog['status'] = 0;
-                                    }
-                                    array_push($fxtmp, $jzmylog);
+
+                                        $jzmylog['oid'] = $orderid;
+                                        $jzmylog['fxprice'] = round($fxlog['fxyj'] * 0.1, 2);
+                                        $jzmylog['ctime'] = time();
+                                        $jzmylog['fxyj'] = round($fxlog['fxyj'] * 0.1 / $counts, 2);
+                                        $jzmylog['fhlb'] = "价值盟友";
+                                        $jzmylog['from'] = $fx2['id'];
+                                        $jzmylog['fromname'] = $fx2['nickname'];
+                                        $jzmylog['to'] = $vv['id'];
+                                        $jzmylog['toname'] = $vv['nickname'];
+                                        $vv['money'] = $vv['money'] + $jzmylog['fxyj'];
+                                        $rfx = $mvip->save($vv);
+                                        if (FALSE !== $rfx) {
+                                            //佣金发放成功
+                                            $jzmylog['status'] = 1;
+                                        } else {
+                                            //佣金发放失败
+                                            $jzmylog['status'] = 0;
+                                        }
+                                        array_push($fxtmp, $jzmylog);
+
                                 }
                             }
                             //2.获得同一级左右分享的5%
                             if ($fx2['pid'] > 0) {
-                                $zyvips = $mvip->where('pid=' . $fx2['pid'] . ' and id <> ' . $fx2['id'])->select();
-                                $zycounts = $mvip->where('pid=' . $fx2['pid'] . ' and id <> ' . $fx2['id'])->count();
+                                $zyvips = $mvip->where('pid=' . $fx2['pid'] . ' and id <> ' . $fx2['id'] . ' and isfx =1')->select();
+                                $zycounts = $mvip->where('pid=' . $fx2['pid'] . ' and id <> ' . $fx2['id'] . ' and isfx =1')->count();
                                 foreach ($zyvips as $kk => $vv) {
-                                    $zylog['oid'] = $orderid;
-                                    $zylog['fxprice'] = round($fxlog['fxyj'] * 0.05, 2);
-                                    $zylog['ctime'] = time();
-                                    $zylog['fxyj'] = round($fxlog['fxyj'] * 0.05 / $zycounts, 2);
-                                    $zylog['fhlb'] = "价值盟友";
-                                    $zylog['from'] = $fx2['id'];
-                                    $zylog['fromname'] = $fx2['nickname'];
-                                    $zylog['to'] = $vv['id'];
-                                    $zylog['toname'] = $vv['nickname'];
-                                    $vv['money'] = $vv['money'] + $zylog['fxyj'];
-                                    $rfx = $mvip->save($vv);
-                                    if (FALSE !== $rfx) {
-                                        //佣金发放成功
-                                        $zylog['status'] = 1;
-                                    } else {
-                                        //佣金发放失败
-                                        $zylog['status'] = 0;
-                                    }
-                                    array_push($fxtmp, $zylog);
+
+                                        $zylog['oid'] = $orderid;
+                                        $zylog['fxprice'] = round($fxlog['fxyj'] * 0.05, 2);
+                                        $zylog['ctime'] = time();
+                                        $zylog['fxyj'] = round($fxlog['fxyj'] * 0.05 / $zycounts, 2);
+                                        $zylog['fhlb'] = "价值盟友";
+                                        $zylog['from'] = $fx2['id'];
+                                        $zylog['fromname'] = $fx2['nickname'];
+                                        $zylog['to'] = $vv['id'];
+                                        $zylog['toname'] = $vv['nickname'];
+                                        $vv['money'] = $vv['money'] + $zylog['fxyj'];
+                                        $rfx = $mvip->save($vv);
+                                        if (FALSE !== $rfx) {
+                                            //佣金发放成功
+                                            $zylog['status'] = 1;
+                                        } else {
+                                            //佣金发放失败
+                                            $zylog['status'] = 0;
+                                        }
+                                        array_push($fxtmp, $zylog);
+
                                 }
                             }
                         }
@@ -1412,56 +1424,60 @@ class ShopController extends BaseController
 
                             //价值盟友模块
                             //1.获得上级分享红利的10% 多人平均分配
-                            $subvips = $mvip->where('pid=' . $fx3['id'])->select();
-                            $counts = $mvip->where('pid=' . $fx3['id'])->count();
+                            $subvips = $mvip->where('pid=' . $fx3['id'] . ' and isfx =1')->select();
+                            $counts = $mvip->where('pid=' . $fx3['id'] . ' and isfx =1')->count();
                             if ($counts > 0) {
                                 foreach ($subvips as $kk => $vv) {
-                                    $jzmylog['oid'] = $orderid;
-                                    $jzmylog['fxprice'] = round($fxlog['fxyj'] * 0.1, 2);
-                                    $jzmylog['ctime'] = time();
-                                    $jzmylog['fxyj'] = round($fxlog['fxyj'] * 0.1 / $counts, 2);
-                                    $jzmylog['fhlb'] = "价值盟友";
-                                    $jzmylog['from'] = $fx3['id'];
-                                    $jzmylog['fromname'] = $fx3['nickname'];
-                                    $jzmylog['to'] = $vv['id'];
-                                    $jzmylog['toname'] = $vv['nickname'];
-                                    $vv['money'] = $vv['money'] + $jzmylog['fxyj'];
-                                    $rfx = $mvip->save($vv);
-                                    if (FALSE !== $rfx) {
-                                        //佣金发放成功
-                                        $jzmylog['status'] = 1;
-                                    } else {
-                                        //佣金发放失败
-                                        $jzmylog['status'] = 0;
-                                    }
-                                    array_push($fxtmp, $jzmylog);
+
+                                        $jzmylog['oid'] = $orderid;
+                                        $jzmylog['fxprice'] = round($fxlog['fxyj'] * 0.1, 2);
+                                        $jzmylog['ctime'] = time();
+                                        $jzmylog['fxyj'] = round($fxlog['fxyj'] * 0.1 / $counts, 2);
+                                        $jzmylog['fhlb'] = "价值盟友";
+                                        $jzmylog['from'] = $fx3['id'];
+                                        $jzmylog['fromname'] = $fx3['nickname'];
+                                        $jzmylog['to'] = $vv['id'];
+                                        $jzmylog['toname'] = $vv['nickname'];
+                                        $vv['money'] = $vv['money'] + $jzmylog['fxyj'];
+                                        $rfx = $mvip->save($vv);
+                                        if (FALSE !== $rfx) {
+                                            //佣金发放成功
+                                            $jzmylog['status'] = 1;
+                                        } else {
+                                            //佣金发放失败
+                                            $jzmylog['status'] = 0;
+                                        }
+                                        array_push($fxtmp, $jzmylog);
+
                                 }
                             }
                             //2.获得同一级左右分享的5%
                             if ($fx3['pid'] > 0) {
-                                $zyvips = $mvip->where('pid=' . $fx3['pid'] . ' and id <> ' . $fx3['id'])->select();
-                                $zycounts = $mvip->where('pid=' . $fx3['pid'] . ' and id <> ' . $fx3['id'])->count();
+                                $zyvips = $mvip->where('pid=' . $fx3['pid'] . ' and id <> ' . $fx3['id'] . ' and isfx =1')->select();
+                                $zycounts = $mvip->where('pid=' . $fx3['pid'] . ' and id <> ' . $fx3['id'] . ' and isfx =1')->count();
                                 foreach ($zyvips as $kk => $vv) {
-                                    $zylog['oid'] = $orderid;
-                                    $zylog['fxprice'] = round($fxlog['fxyj'] * 0.05, 2);
-                                    $zylog['ctime'] = time();
-                                    $zylog['fxyj'] = round($fxlog['fxyj'] * 0.05 / $zycounts, 2);
-                                    $zylog['fhlb'] = "价值盟友";
-                                    $zylog['from'] = $fx3['id'];
-                                    $zylog['fromname'] = $fx3['nickname'];
-                                    $zylog['to'] = $vv['id'];
-                                    $zylog['toname'] = $vv['nickname'];
-                                    $vv['money'] = $vv['money'] + $zylog['fxyj'];
-                                    $rfx = $mvip->save($vv);
-                                    if (FALSE !== $rfx) {
-                                        //佣金发放成功
-                                        $zylog['status'] = 1;
-                                    } else {
-                                        //佣金发放失败
-                                        $zylog['status'] = 0;
+
+                                        $zylog['oid'] = $orderid;
+                                        $zylog['fxprice'] = round($fxlog['fxyj'] * 0.05, 2);
+                                        $zylog['ctime'] = time();
+                                        $zylog['fxyj'] = round($fxlog['fxyj'] * 0.05 / $zycounts, 2);
+                                        $zylog['fhlb'] = "价值盟友";
+                                        $zylog['from'] = $fx3['id'];
+                                        $zylog['fromname'] = $fx3['nickname'];
+                                        $zylog['to'] = $vv['id'];
+                                        $zylog['toname'] = $vv['nickname'];
+                                        $vv['money'] = $vv['money'] + $zylog['fxyj'];
+                                        $rfx = $mvip->save($vv);
+                                        if (FALSE !== $rfx) {
+                                            //佣金发放成功
+                                            $zylog['status'] = 1;
+                                        } else {
+                                            //佣金发放失败
+                                            $zylog['status'] = 0;
+                                        }
+                                        array_push($fxtmp, $zylog);
                                     }
-                                    array_push($fxtmp, $zylog);
-                                }
+
                             }
                         }
                     }
@@ -1510,40 +1526,93 @@ class ShopController extends BaseController
                     //合伙人佣金发放
                     if ($cache['bdgoodsid']) {
                         $viphhr = M('vip_hhr');
-                        $hhr = $mvip->where('ishhr=1')->select();
-                        $count = $mvip->where('ishhr=1')->count();
+                        $path = $myvip['path'];
+                        $plvs = explode('-',$path);
+                        $hhrids = array();
                         $rate = $viphhr->find();
-                        if ($count > 0) {
-                            foreach ($hhr as $k => $v) {
-                                $fxhhr = $mvip->where('id=' . $v['id'])->find();
-                                $fxhhr['money'] = $fxhhr['money'] + round($fxprice * $rate['bl'] / $count, 2);
-                                $fxhhr['total_xxbuy'] = $fxhhr['total_xxbuy'] + 1;//下线中购买产品人数计数
-                                $fxhhr['total_xxyj'] = $fxhhr['total_xxyj'] + $fxlog['fxyj'];//下线贡献佣金
-                                $rfx = $mvip->save($fxhhr);
-                                if (FALSE !== $rfx) {
-                                    //佣金发放成功
-                                    $hfxlog['status'] = 1;
-                                } else {
-                                    //佣金发放失败
-                                    $hfxlog['status'] = 0;
-                                }
-                                $hfxlog['oid'] = $cache['id'];
-                                $hfxlog['from'] = $_SESSION['WAP']['vipid'];
-                                $hfxlog['fxprice'] = $fxprice;
-                                $hfxlog['ctime'] = time();
-                                $hfxlog['fxyj'] = round($fxprice * $rate['bl'] / $count, 2);
-                                $hfxlog['fromname'] = $_SESSION['WAP']['vip']['nickname'];
-                                $hfxlog['to'] = $v['id'];
-                                $hfxlog['toname'] = $v['nickname'];
-                                $hfxlog['fhlb'] = "合伙人分红";
-                                $mfxlog->add($hfxlog);
-                            }
+                        if (count($plvs) > 0)
+                        {
+                           for ($i=0;$i<count($plvs);$i++)
+                           {
+                               $fxhhr = $mvip->where('id=' . $plvs[$i])->find();
+                               if ($fxhhr['ishhr'])
+                               {
+                                   array_push($hhrids,$plvs[$i]);
+                               }
+                           }
+
+                           //合伙人平分
+                            $count = count($hhrids);
+                           if($count > 0)
+                           {
+                               for ($i=0;$i<1;$i++) {
+                                   $fxhhr = $mvip->where('id=' . $hhrids[$i])->find();
+                                   $fxhhr['money'] = $fxhhr['money'] + round($fxprice * $fxhhr['hhrbl'] / 1, 2);
+                                   $fxhhr['total_xxbuy'] = $fxhhr['total_xxbuy'] + 1;//下线中购买产品人数计数
+                                   $fxhhr['total_xxyj'] = $fxhhr['total_xxyj'] + round($fxprice * $fxhhr['hhrbl'] / 1, 2);;//下线贡献佣金
+                                   $rfx = $mvip->save($fxhhr);
+                                   if (FALSE !== $rfx) {
+                                       //佣金发放成功
+                                       $hfxlog['status'] = 1;
+                                   } else {
+                                       //佣金发放失败
+                                       $hfxlog['status'] = 0;
+                                   }
+                                   $hfxlog['oid'] = $cache['id'];
+                                   $hfxlog['from'] = $_SESSION['WAP']['vipid'];
+                                   $hfxlog['fxprice'] = $fxprice;
+                                   $hfxlog['ctime'] = time();
+                                   $hfxlog['fxyj'] = round($fxprice * $fxhhr['hhrbl'] / 1, 2);
+                                   $hfxlog['fromname'] = $_SESSION['WAP']['vip']['nickname'];
+                                   $hfxlog['to'] = $fxhhr['id'];
+                                   $hfxlog['toname'] = $fxhhr['nickname'];
+                                   $hfxlog['fhlb'] = "合伙人分红";
+                                   $mfxlog->add($hfxlog);
+                               }
+                           }
                         }
                     }
                 }
             }
+
+            //精英俱乐部佣金发放
+            if ($cache['bdgoodsid']) {
+                $vipjyjlb = M('vip_jyjlb');
+                $jyjlb = $mvip->where('isjyjlb=1')->select();
+                $count = $mvip->where('isjyjlb=1')->count();
+                $rate = $vipjyjlb->find();
+                if ($count > 0) {
+                    foreach ($jyjlb as $k => $v) {
+                        $fxjy = $mvip->where('id=' . $v['id'])->find();
+                        $fxjy['money'] = $fxjy['money'] + round($fxprice * $rate['bl'] / $count, 2);
+                        $fxjy['total_xxbuy'] = $fxjy['total_xxbuy'] + 1;//下线中购买产品人数计数
+                        $fxjy['total_xxyj'] = $fxjy['total_xxyj'] + round($fxprice * $rate['bl'] / $count, 2);//下线贡献佣金
+                        $rfx = $mvip->save($fxjy);
+                        if (FALSE !== $rfx) {
+                            //佣金发放成功
+                            $jyfxlog['status'] = 1;
+                        } else {
+                            //佣金发放失败
+                            $jyfxlog['status'] = 0;
+                        }
+                        $jyfxlog['oid'] = $cache['id'];
+                        $jyfxlog['from'] = $_SESSION['WAP']['vipid'];
+                        $jyfxlog['fxprice'] = $fxprice;
+                        $jyfxlog['ctime'] = time();
+                        $jyfxlog['fxyj'] = round($fxprice * $rate['bl'] / $count, 2);
+                        $jyfxlog['fromname'] = $_SESSION['WAP']['vip']['nickname'];
+                        $jyfxlog['to'] = $v['id'];
+                        $jyfxlog['toname'] = $v['nickname'];
+                        $jyfxlog['fhlb'] = "精英俱乐部分红";
+                        $mfxlog->add($jyfxlog);
+                    }
+                }
+            }
+
             //购物券发放
             $commission->orderGwq(unserialize($cache['items']),$cache['vipid'],$cache['id']);
+            //平价商城佣金发放
+            $commission->orderPj(unserialize($cache['items']),$cache['vipid'],$cache['id']);
 
             $mlog = M('Shop_order_log');
             $dlog['oid'] = $cache['id'];

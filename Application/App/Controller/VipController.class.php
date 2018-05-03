@@ -200,7 +200,7 @@ class VipController extends BaseController
             $condition['time'] = date('Y-m-d');
             //查询今天金果获得数量
             $todayApple = $apple->where($condition)->find();
-            if(!$todayApple)
+            if(!$todayApple || $todayApple == null)
             {
                 $vip = $m->where('id='.$vipid)->find();
                 $vip['score'] =  $vip['score'] + 8;
