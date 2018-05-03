@@ -254,14 +254,24 @@
 					App_gmuMsg('请选择收货地址！');
 					return false;
 				}
+                //付款总额必须为正数
+                var totalprice = "{$totalprice}";
+                if(totalprice < 0)
+                {
+                    App_gmuMsg('商品金额不能为负数！');
+                    return false;
+                }
 				if(!$('#paytype').val()){
 					App_gmuMsg('请选择支付方式！');
 					return false;
 				}
+
                 if($('#ishavebd').val()==1 && $('#ishavepj').val() ==1){
                     App_gmuMsg('不能同时购买两个专区的商品！');
                     return false;
                 }
+
+
 
 				var okfun=function(){$('#orderform').submit();}
 				//alert($('#djqid').val());

@@ -51,8 +51,11 @@
 					<div class="Appbox">
 				   	<ul class="cp_list">
 				   		<volist name="cache" id="vo">
-					   		<li style="padding-bottom: 10px;"><a href="#"><i class="iconfont tb"><img class="hot-ico" src="{$vo.headimgurl}" /> </i><div><h3 style="color: red;">{$vo.nickname}</h3>
-					    	<p> 总消费:{$vo.total_buy}&nbsp;加入时间:{$vo.ctime|date="Y-m-d",###}</p></div></a>
+					   		<li style="padding-bottom: 10px;"><a href="#"><i class="iconfont tb"><img class="hot-ico" src="{$vo.headimgurl}" /> </i>
+					   		<div><h3 style="color: red;">{$vo.nickname}</h3>
+					    	<p> 总消费:{$vo.total_buy}&nbsp;加入时间:{$vo.ctime|date="Y-m-d",###}&nbsp;</p>
+					    	<p> 下线人数:{$vo.total_xxlink}&nbsp;</p>
+					    	</div></a>
 					    	</li>
 				   		</volist>		    	
 				     </ul>
