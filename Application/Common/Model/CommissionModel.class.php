@@ -88,7 +88,7 @@ class CommissionModel
                 //报单商品
                 if ($goods['isbd']==1)
                 {
-                    $gwqmoney = $goods['gwqmoney'];
+                    $gwqmoney = $goods['gwqmoney']*$vv['num'];
                     $maxgwqmoney = $goods['maxgwqmoney'];
                     //查询今天已经此产品已得购物券总额
                     $condition['user_id'] = $vipid;
@@ -113,7 +113,7 @@ class CommissionModel
                 else//平价商城(返还50%购物券)
                 {
 
-                    $fgwq = round($goods['price']*0.5,2);
+                    $fgwq = round($goods['price']*0.5*$vv['num'],2);
                     //插入购物券日志
                     $gwq['user_id'] = $vipid;
                     $gwq['good_id'] = $goods['id'];
@@ -227,9 +227,9 @@ class CommissionModel
                         $fx1rate = $level1['yjrate'];
                         //$fx1rate = $goods['fx1rate'];
                         //if($fx1['ispj']) {
-                            $fx1['money'] = $fx1['money'] + round($fx1rate, 2);
+                            $fx1['money'] = $fx1['money'] + round($fx1rate, 2)*$vv['num'];
                             $fx1['total_xxbuy'] = $fx1['total_xxbuy'] + 1;//下线中购买产品总次数
-                            $fx1['total_xxyj'] = $fx1['total_xxyj'] + round($fx1rate, 2);//下线贡献佣金
+                            $fx1['total_xxyj'] = $fx1['total_xxyj'] + round($fx1rate, 2)*$vv['num'];//下线贡献佣金
                             $rfx = $mvip->save($fx1);
                             if (FALSE !== $rfx) {
                                 //佣金发放成功
@@ -245,7 +245,7 @@ class CommissionModel
                             $fxlog['to'] = $pid;
                             $fxlog['toname'] = $fx1['nickname'];
                             $fxlog['fxprice'] = $goods['price'];
-                            $fxlog['fxyj'] = round($fx1rate, 2);
+                            $fxlog['fxyj'] = round($fx1rate, 2)*$vv['num'];
                             $fxlog['ctime'] = time();
                             array_push($fxtmp, $fxlog);
                         //}
@@ -256,9 +256,9 @@ class CommissionModel
                             $fx2rate = $level2['ejrate'];
                             //$fx1rate = $goods['fx1rate'];
                             //if($fx2['ispj']) {
-                                $fx2['money'] = $fx2['money'] + round($fx2rate, 2);
+                                $fx2['money'] = $fx2['money'] + round($fx2rate, 2)*$vv['num'];
                                 $fx2['total_xxbuy'] = $fx2['total_xxbuy'] + 1;//下线中购买产品总次数
-                                $fx2['total_xxyj'] = $fx2['total_xxyj'] + round($fx2rate, 2);//下线贡献佣金
+                                $fx2['total_xxyj'] = $fx2['total_xxyj'] + round($fx2rate, 2)*$vv['num'];//下线贡献佣金
                                 $rfx = $mvip->save($fx2);
                                 if (FALSE !== $rfx) {
                                     //佣金发放成功
@@ -274,7 +274,7 @@ class CommissionModel
                                 $fxlog['to'] = $fx1['pid'];
                                 $fxlog['toname'] = $fx2['nickname'];
                                 $fxlog['fxprice'] = $goods['price'];
-                                $fxlog['fxyj'] = round($fx2rate, 2);
+                                $fxlog['fxyj'] = round($fx2rate, 2)*$vv['num'];
                                 $fxlog['ctime'] = time();
                                 array_push($fxtmp, $fxlog);
                             //}
@@ -285,9 +285,9 @@ class CommissionModel
                                 $fx3rate = $level3['sjrate'];
                                 //if($fx3['ispj'])
                                 //{
-                                    $fx3['money'] = $fx3['money'] + round($fx3rate, 2);
+                                    $fx3['money'] = $fx3['money'] + round($fx3rate, 2)*$vv['num'];
                                     $fx3['total_xxbuy'] = $fx3['total_xxbuy'] + 1;//下线中购买产品总次数
-                                    $fx3['total_xxyj'] = $fx3['total_xxyj'] + round($fx3rate, 2);//下线贡献佣金
+                                    $fx3['total_xxyj'] = $fx3['total_xxyj'] + round($fx3rate, 2)*$vv['num'];//下线贡献佣金
                                     $rfx = $mvip->save($fx3);
                                     if (FALSE !== $rfx) {
                                         //佣金发放成功
@@ -303,9 +303,101 @@ class CommissionModel
                                     $fxlog['to'] = $fx2['pid'];
                                     $fxlog['toname'] = $fx3['nickname'];
                                     $fxlog['fxprice'] = $goods['price'];
-                                    $fxlog['fxyj'] = round($fx3rate, 2);
+                                    $fxlog['fxyj'] = round($fx3rate, 2)*$vv['num'];
                                     $fxlog['ctime'] = time();
                                     array_push($fxtmp, $fxlog);
+                                //}
+                            }
+                        }
+                    }
+                }
+
+                if (count($fxtmp) >= 1) {
+                    $refxlog = $mfxlog->addAll($fxtmp);
+                    if (!$refxlog) {
+                        file_put_contents('./Data/app_fx_error.txt', '错误日志时间:' . date('Y-m-d H:i:s') . PHP_EOL . '错误纪录信息:' . $rfxlog . PHP_EOL . PHP_EOL . $mfxlog->getLastSql() . PHP_EOL . PHP_EOL, FILE_APPEND);
+                    }
+                }
+            }
+        }
+    }
+
+    //计算平价商城待收佣金
+    public function orderPjDs($items = array(),$vipid,$orderid)
+    {
+        if (count($items) > 0)
+        {
+            foreach ($items as $kk => $vv)
+            {
+                $goods = M('Shop_goods')->where('id='.$vv['goodsid'])->find();
+                $mvip = M('vip');
+                $level = M('vip_level');
+                $fxtmp = array();//缓存数组
+                $vip = $mvip->where('id='.$vipid)->find();
+                if ($goods['isbd']!=1)
+                {
+                    $pid = $vip['pid'];
+                    $mfxlog = M('fx_dslog');
+                    if($pid)
+                    {
+                        $fx1 = $mvip->where('id=' . $pid)->find();
+                        $level1 = $level->where('id='.$fx1['levelid'])->find();
+                        $fx1rate = $level1['yjrate'];
+                        //$fx1rate = $goods['fx1rate'];
+                        //if($fx1['ispj']) {
+                        $fxlog['status'] = 1;
+                        $fxlog['fhlb'] = "平价奖励";
+                        $fxlog['oid'] = $orderid;
+                        $fxlog['from'] = $vipid;
+                        $fxlog['fromname'] = $vip['nickname'];
+                        $fxlog['to'] = $pid;
+                        $fxlog['toname'] = $fx1['nickname'];
+                        $fxlog['fxprice'] = $goods['price'];
+                        $fxlog['fxyj'] = round($fx1rate, 2)*$vv['num'];
+                        $fxlog['ctime'] = time();
+                        array_push($fxtmp, $fxlog);
+                        //}
+                        //第二层分销
+                        if ($fx1['pid']) {
+                            $fx2 = $mvip->where('id=' . $fx1['pid'])->find();
+                            $level2 = $level->where('id='.$fx2['levelid'])->find();
+                            $fx2rate = $level2['ejrate'];
+                            //$fx1rate = $goods['fx1rate'];
+                            //if($fx2['ispj']) {
+                            //佣金发放成功
+                            $fxlog['status'] = 1;
+                            $fxlog['fhlb'] = "平价奖励";
+                            $fxlog['oid'] = $orderid;
+                            $fxlog['from'] = $vipid;
+                            $fxlog['fromname'] = $vip['nickname'];
+                            $fxlog['to'] = $fx1['pid'];
+                            $fxlog['toname'] = $fx2['nickname'];
+                            $fxlog['fxprice'] = $goods['price'];
+                            $fxlog['fxyj'] = round($fx2rate, 2)*$vv['num'];
+                            $fxlog['ctime'] = time();
+                            array_push($fxtmp, $fxlog);
+                            //}
+                            //第三层分销
+                            if ($fx2['pid']) {
+                                $fx3 = $mvip->where('id=' . $fx2['pid'])->find();
+                                $level3 = $level->where('id='.$fx3['levelid'])->find();
+                                $fx3rate = $level3['sjrate'];
+                                //if($fx3['ispj'])
+                                //{
+
+                                //佣金发放成功
+                                $fxlog['status'] = 1;
+
+                                $fxlog['fhlb'] = "平价奖励";
+                                $fxlog['oid'] = $orderid;
+                                $fxlog['from'] = $vipid;
+                                $fxlog['fromname'] = $vip['nickname'];
+                                $fxlog['to'] = $fx2['pid'];
+                                $fxlog['toname'] = $fx3['nickname'];
+                                $fxlog['fxprice'] = $goods['price'];
+                                $fxlog['fxyj'] = round($fx3rate, 2)*$vv['num'];
+                                $fxlog['ctime'] = time();
+                                array_push($fxtmp, $fxlog);
                                 //}
                             }
                         }
