@@ -47,18 +47,24 @@
 				<span class="iconfont fr icon-r">&#xe661;</span>
 			</a>
 			<div class="home-lst2 border-b1 border-t1 back2 ovflw" style="display: none;" id="mymoney">
+				<!--
 				<a  href="#" class="border-b1 ovflw home-li">
 					<span class="iconfont fl icon text-c icon-bc2">&#xe6ed;</span>
 					<span class="home-tt color6">我的{$_SESSION['SHOP']['set']['yjname']}：{$data.money}</span>
 				</a>
+				-->
+				<!--
 				<a href="#" class="border-b1 ovflw home-li">
 					<span class="iconfont fl icon text-c icon-bc3">&#xe6ac;</span>
 					<span class="home-tt color6">待收{$_SESSION['SHOP']['set']['yjname']}：{$data.fxmoney}</span>
 				</a>
+				-->
+				<!--
 				<a href="#"  class="ovflw home-li">
 					<span class="iconfont fl icon text-c icon-bc4">&#xe66c;</span>
 					<span class="home-tt color6 fl">在审{$_SESSION['SHOP']['set']['yjname']}：{$data.txmoney}</span>
 				</a>
+				-->
 			</div>
 			<div class="home-lst2 border-b1 border-t1 back2 ovflw" id="mygroupbtn">
 					<a href="#" class="ovflw home-li">
@@ -107,13 +113,13 @@
 				<!--</a>-->
 			</div>
 			<div class="home-lst2 border-b1 border-t1 back2 ovflw">
-				<!--
+
 				<a href="{:U('App/Fx/dslog')}" class="border-b1 ovflw home-li">
 					<span class="iconfont fl icon text-c icon-bc1">&#xe699;</span>
 					<span class="home-tt color6">待收{$_SESSION['SHOP']['set']['yjname']}</span>
 					<span class="iconfont fr icon-r">&#xe6a3</span>
 				</a>
-				-->
+
 				<a href="{:U('App/Fx/fxlog')}" class="border-b1 ovflw home-li">
 					<span class="iconfont fl icon text-c icon-bc2">&#xe6af;</span>
 					<span class="home-tt color6">已收{$_SESSION['SHOP']['set']['yjname']}</span>
