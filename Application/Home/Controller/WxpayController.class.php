@@ -5,6 +5,7 @@
 namespace Home\Controller;
 
 use Think\Controller;
+use App\Controller\ShopController;
 
 class WxpayController extends Controller
 {
@@ -369,7 +370,9 @@ class WxpayController extends Controller
                     }
 
                     //代收花生米计算-只减不增
-                    $rds = $this->doDs($order);
+                    $sc = new ShopController();
+                    $sc->doDs($order);
+                    //$rds = $this->doDs($order);
 
                 } else {
                     //记录报警信息
